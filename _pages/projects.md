@@ -2,9 +2,9 @@
 layout: page
 title: Projects
 permalink: /projects/
-description: A growing collection of your incredibly cool projects.
+description: Personal projects (mainly in robotics and computer vision). Some of these projects may also have contributed to one or more projects in the Publications section.
 nav: true
-nav_order: 2
+nav_order: 1
 display_categories:
 horizontal: false
 ---
