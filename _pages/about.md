@@ -8,14 +8,15 @@ profile:
   align: right
   image: prof_pic.jpg
   image_circular: true # crops the image to make it circular
-  # more_info: >
-  #   <p>University of Minnesota - Twin Cities</p>
-  #   <p>Minneapolis, Minnesota</p>
+  more_info: >
+    <p>University of Minnesota</p>
+  
 
-news: false  # includes a list of news items
-latest_posts: true  # includes a list of the newest posts
+news: true  # includes a list of news items
+latest_posts: false  # includes a list of the newest posts
 selected_papers: false # includes a list of papers marked as "selected={true}"
 social: true  # includes social icons at the bottom of the page
+projects: true # includes projects
 ---
 
 Hello! I am a third-year undergraduate student studying computer science and math at the University of Minnesota - Twin Cities. My research interests include **computer vision** and general **machine learning** applications to **robotics** and **robotic manipulation**, and I currently do research with [Prof. Karthik Desingh](https://karthikdesingh.com) at the [Robotics: Perception and Manipulation Lab](https://rpm-lab.github.io). I'm always trying to explore new ways to help robots do cool things!

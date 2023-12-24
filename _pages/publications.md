@@ -1,4 +1,4 @@
----
+<!-- ---
 layout: page
 permalink: /publications/
 title: Publications
@@ -11,4 +11,4 @@ _pages/publications.md
 
 {% bibliography -f {{ site.scholar.bibliography }} %}
 
-</div>
+</div> -->
