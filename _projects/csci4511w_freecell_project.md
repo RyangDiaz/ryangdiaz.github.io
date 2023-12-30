@@ -6,3 +6,7 @@ img: assets/img/freecell-game.png
 importance: 4
 category: Other
 ---
+
+See the report [here](../../assets/pdf/CSCI4511W_report.pdf)!
+
+See the code [here](https://github.com/RyangDiaz/freecell-search-solver)!

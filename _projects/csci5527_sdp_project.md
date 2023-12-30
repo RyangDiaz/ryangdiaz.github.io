@@ -6,3 +6,7 @@ img: assets/img/slot_real_3slots.png
 importance: 3
 category: Robotics
 ---
+
+See the report [here](../../assets/pdf/CSCI5527_report.pdf)!
+
+See the code [here](https://github.com/chahyon-ku/slot-diffusion-policy)!

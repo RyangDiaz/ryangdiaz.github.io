@@ -6,3 +6,7 @@ img: assets/img/csci5561_nerf_project/room1_sam_seg.gif
 importance: 1
 category: Computer Vision
 ---
+
+See the report [here](../../assets/pdf/CSCI5561_report.pdf)!
+
+See the code here (coming soon)!
