@@ -8,4 +8,8 @@ category: Robotics
 # related_publications: einstein1956investigations, einstein1950meaning
 ---
 
+See the poster presentation [here](../../assets/pdf/URS_Poster_Presentation.pdf)!
+
+See the report [here](../../assets/pdf/URS_Spring_2023___Final_Report.pdf)!
+
 See the code here (coming soon)!
