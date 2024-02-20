@@ -10,6 +10,8 @@ category: Robotics
 
 See the poster presentation [here](../../assets/pdf/URS_Poster_Presentation.pdf)!
 
+See the video presentation [here](https://drive.google.com/file/d/11O7EzkdPCGOWmlAIpdVG5OkPKGhUArB_/view?usp=share_link)!
+
 See the report [here](../../assets/pdf/URS_Spring_2023___Final_Report.pdf)!
 
 See the code here (coming soon)!
