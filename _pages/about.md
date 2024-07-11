@@ -20,7 +20,7 @@ social: true  # includes social icons at the bottom of the page
 projects: true # includes projects
 ---
 
-Hello! I am a third-year undergraduate student studying computer science and math at the University of Minnesota - Twin Cities. My research interests include **computer vision** and general **machine learning** applications to **robotics** and **robotic manipulation**, and I currently do research with [Prof. Karthik Desingh](https://karthikdesingh.com) at the [Robotics: Perception and Manipulation Lab](https://rpm-lab.github.io). I'm always trying to explore new ways to help robots do cool things!
+Hello! I am a fourth-year undergraduate student studying computer science and math at the University of Minnesota - Twin Cities. My research interests include **computer vision** and general **machine learning** applications to **robotics** and **robotic manipulation**, and I am currently at the [WashU CSE REU](https://sites.wustl.edu/csereu/) doing research on reinforcement learning for autonomous driving with [Prof. Yevgeniy Vorobeychik](https://engineering.wustl.edu/faculty/Yevgeniy-Vorobeychik.html). At UMN, I also do research with [Prof. Karthik Desingh](https://karthikdesingh.com) at the [Robotics: Perception and Manipulation Lab](https://rpm-lab.github.io). I'm always trying to explore new ways to help robots do cool things!
 
 Outside of academics and research, I enjoy cooking, reading, and worldbuilding (as well as procrastinating way too much on actually writing). Whether it be writing papers, writing code, or writing stories, the keyboard always calls...
 
