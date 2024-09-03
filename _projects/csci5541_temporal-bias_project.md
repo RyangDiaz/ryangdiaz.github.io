@@ -3,7 +3,7 @@ layout: page
 title: Temporal Political Bias Analysis in Media Using Language Models
 description: Project for CSCI 5541 - Natural Language Processing.
 img: assets/img/cnn_sub.png
-importance: 2
+importance: 4
 category: Other
 ---
 
