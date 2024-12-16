@@ -3,7 +3,7 @@ layout: page
 title: An Exploration of Fourier Features for Image and Video Representations
 description: Project for MATH 5466 - Mathematics of Machine Learning and Data Analysis II.
 img: assets/img/napkin_skip_5.gif
-importance: 2
+importance: 3
 category: Computer Vision
 ---
 

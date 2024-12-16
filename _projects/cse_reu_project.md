@@ -3,7 +3,7 @@ layout: page
 title: Obstacle Detection and Avoidance in Simulated Autonomous Driving
 description: Project for the WashU CSE REU program in Summer 2024.
 img: assets/img/carla.gif
-importance: 1
+importance: 2
 category: Robotics
 ---
 
