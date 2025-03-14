@@ -4,5 +4,5 @@ permalink: /cv/
 title: CV
 nav: true
 nav_order: 4
-redirect_to: /assets/pdf/CV_Fall_2024.pdf
+redirect_to: /assets/pdf/PhD_CV.pdf
 ---
