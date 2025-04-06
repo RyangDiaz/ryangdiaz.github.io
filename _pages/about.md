@@ -22,7 +22,7 @@ projects: true # includes projects
 
 Hello! I am a fourth-year undergraduate student studying computer science and math at the University of Minnesota - Twin Cities. My research interests include **computer vision** and general **machine learning** applications to **robotics** and **robotic manipulation**, and I currently do research with [Prof. Karthik Desingh](https://karthikdesingh.com) at the [Robotics: Perception and Manipulation Lab](https://rpm-lab.github.io). This past summer, I was at the [WashU CSE REU](https://sites.wustl.edu/csereu/) doing research on reinforcement learning for autonomous driving with [Prof. Yevgeniy Vorobeychik](https://engineering.wustl.edu/faculty/Yevgeniy-Vorobeychik.html). I'm always trying to explore new ways to help robots do cool things!
 
-This Fall, I hope to apply to PhD programs in computer science for next year and continue my research journey!
+I will be starting a PhD in Computer Science at Rice University in Fall 2025, working with [Prof. Vaibhav Unhelkar](https://unhelkar.github.io) at the [Human-Centered AI and Robotics Group](https://unhelkar.github.io/group/)!
 
 Outside of academics and research, I enjoy cooking, reading, and worldbuilding (as well as procrastinating way too much on actually writing). Whether it be writing papers, writing code, or writing stories, the keyboard always calls...
 
