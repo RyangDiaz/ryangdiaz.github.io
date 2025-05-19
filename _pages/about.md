@@ -9,8 +9,8 @@ profile:
   image: prof_pic.jpg
   image_circular: true # crops the image to make it circular
   more_info: >
-    <p>University of Minnesota</p>
-    <p>diaz0329[at]umn.edu</p>
+    <p>Rice University</p>
+    <p>rd88[at]rice.edu</p>
   
 
 news: true  # includes a list of news items
