@@ -20,18 +20,18 @@ social: true  # includes social icons at the bottom of the page
 projects: true # includes projects
 ---
 
-<!-- Hello! I am a first-year CS PhD student at Rice University. My research interests include designing human-centric imitation learning algorithms for robotic manipulation, and I currently do research with Prof. Vaibhav Unhelkar at the Human-Centered AI and Robotics Group. I'm always trying to explore new ways to help robots do cool things!
+Hello! I am an incoming first-year CS Ph.D. student at Rice University. My research interests include designing human-centric learning algorithms for robotic manipulation, and I will be doing research with [Prof. Vaibhav Unhelkar](https://unhelkar.github.io) at the [Human-Centered AI and Robotics Group](https://unhelkar.github.io/group/). I'm always trying to explore new ways to help robots do cool things!
 
-Previously, I was an undergraduate at the University of Minnesota where I worked with Prof. Karthik Desingh at the Robotics: Perception and Manipulation Lab on multisensory contact-rich robotic manipulation. I also got the chance to do research on reinforcement learning for autonomous driving with Prof. Yevgeniy Vorobeychik at WashU.
+Previously, I was an undergraduate at the University of Minnesota where I worked with [Prof. Karthik Desingh](https://karthikdesingh.com) at the [Robotics: Perception and Manipulation Lab](https://rpm-lab.github.io) on multisensory contact-rich robotic manipulation. I also got the chance to do research on reinforcement learning for autonomous driving with [Prof. Yevgeniy Vorobeychik](https://engineering.wustl.edu/faculty/Yevgeniy-Vorobeychik.html) at the [WashU CSE REU](https://sites.wustl.edu/csereu/).
 
 Outside of academics and research, I enjoy cooking, reading, and worldbuilding (as well as procrastinating way too much on actually writing). Whether it be writing papers, writing code, or writing stories, the keyboard always calls...
- -->
 
-Hello! I am a fourth-year undergraduate student studying computer science and math at the University of Minnesota - Twin Cities. My current research interests include building robust robotic manipulation systems to perform complex tasks with multisensory data, and I currently do research with [Prof. Karthik Desingh](https://karthikdesingh.com) at the [Robotics: Perception and Manipulation Lab](https://rpm-lab.github.io). This past summer, I was at the [WashU CSE REU](https://sites.wustl.edu/csereu/) doing research on reinforcement learning for autonomous driving in realistic urban environments with [Prof. Yevgeniy Vorobeychik](https://engineering.wustl.edu/faculty/Yevgeniy-Vorobeychik.html). I'm always trying to explore new ways to help robots do cool things!
+
+<!-- Hello! I am a fourth-year undergraduate student studying computer science and math at the University of Minnesota - Twin Cities. My current research interests include building robust robotic manipulation systems to perform complex tasks with multisensory data, and I currently do research with [Prof. Karthik Desingh](https://karthikdesingh.com) at the [Robotics: Perception and Manipulation Lab](https://rpm-lab.github.io). This past summer, I was at the [WashU CSE REU](https://sites.wustl.edu/csereu/) doing research on reinforcement learning for autonomous driving in realistic urban environments with [Prof. Yevgeniy Vorobeychik](https://engineering.wustl.edu/faculty/Yevgeniy-Vorobeychik.html). I'm always trying to explore new ways to help robots do cool things!
 
 I will be starting a PhD in Computer Science at Rice University in Fall 2025, working with [Prof. Vaibhav Unhelkar](https://unhelkar.github.io) at the [Human-Centered AI and Robotics Group](https://unhelkar.github.io/group/)!
 
-Outside of academics and research, I enjoy cooking, reading, and worldbuilding (as well as procrastinating way too much on actually writing). Whether it be writing papers, writing code, or writing stories, the keyboard always calls...
+Outside of academics and research, I enjoy cooking, reading, and worldbuilding (as well as procrastinating way too much on actually writing). Whether it be writing papers, writing code, or writing stories, the keyboard always calls... -->
 
 <!-- Write your biography here. Tell the world about yourself. Link to your favorite [subreddit](http://reddit.com). You can put a picture in, too. The code is already in, just name your picture `prof_pic.jpg` and put it in the `img/` folder.
 
