@@ -10,7 +10,7 @@ body {
     background-color: #fff; /* White background */
     color: #333;
     max-width: 900px; /* Max width similar to example */
-    font-size: 15px; /* Increased base font size slightly */
+    font-size: calc(0.5vw + 0.65625rem); /* Responsive base font size for < 900px */
     font-weight: 300; /* Thinner font weight for the entire page */
     transition: background-color 0.3s ease, color 0.3s ease;
 }
@@ -43,7 +43,7 @@ nav ul li {
 nav ul li a {
     text-decoration: none;
     color: #007bff; /* Blue links, or #555 for more subtle */
-    font-size: 15px; /* Adjusted to match new base */
+    font-size: 1em; /* Relative to body font size */
     font-weight: 400; /* Slightly less than medium for nav links, not too thin */
 }
 
@@ -85,7 +85,8 @@ header {
 }
 
 .profile-pic {
-    width: 220px;
+    width: 100%; /* Make profile picture responsive */
+    max-width: 220px; /* Maintain a max size */
     height: auto;
     border-radius: 20px;
     object-fit: cover;
@@ -102,7 +103,7 @@ header {
 }
 
 .bio h1 {
-    font-size: 42px; /* Slightly increased from 40px */
+    font-size: calc(1.5vw + 1.9em); /* Responsive H1 for < 900px */
     margin-top: 0;
     margin-bottom: 10px;
     color: #000;
@@ -182,7 +183,7 @@ section:last-of-type {
 }
 
 section h2 {
-    font-size: 28px; /* Much bigger section titles */
+    font-size: calc(1vw + 1.27em); /* Responsive H2 for < 900px */
     color: #333;
     font-weight: 500; /* Section titles should still have some prominence */
     /* text-transform: uppercase; */
@@ -287,7 +288,8 @@ span.update-description {
 }
 
 .publication-image img, .project-image img {
-    width: 220px;
+    width: 100%; /* Make it responsive */
+    max-width: 220px; /* Keep original max size */
     height: auto;
     /* border: 1px solid #ddd; */
     margin-bottom: 5px; /* Add a small margin if text wraps under */
@@ -538,5 +540,99 @@ body.dark-mode #theme-toggle {
 
 body.dark-mode #theme-toggle:hover {
     color: #ffec80; /* Lighter sun/moon on hover */
-    background-color: #2c2c2c; /* Slight background on hover in dark mode */
+    background-color: #444; /* Darker background on hover in dark mode */
+}
+
+/* Media Queries for Responsive Design */
+@media (max-width: 768px) {
+    .profile-section {
+        flex-direction: column; /* Stack profile pic and bio on smaller screens */
+        align-items: center;
+    }
+
+    .profile-pic-container {
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+
+    .bio {
+        margin-left: 0; /* Remove left margin when stacked */
+        align-items: center; /* Center bio content */
+    }
+
+    .bio p {
+        text-align: center; /* Center bio text on smaller screens */
+        align-self: center; /* Ensure it centers if flex properties interfere */
+    }
+
+    nav ul {
+        text-align: center; /* Center nav links */
+        padding-right: 0;
+    }
+
+    nav ul li {
+        margin-left: 10px;
+        margin-right: 10px; /* Add some right margin for spacing */
+    }
+
+    .news-section li {
+        flex-direction: column; /* Stack date and description */
+        align-items: flex-start; /* Align items to the start */
+    }
+
+    span.update-date {
+        margin-right: 0;
+        margin-bottom: 5px; /* Add space between date and description */
+        flex-basis: auto; /* Allow date to take natural width */
+    }
+}
+
+@media (max-width: 480px) {
+    /* body font-size rule removed from here, global rule will apply and scale down */
+
+    .bio h1 {
+        font-size: calc(2.5vw + 1em); /* Adjust H1 for very small screens */
+    }
+
+    section h2 {
+        font-size: calc(1.8vw + 0.8em); /* Adjust H2 for very small screens */
+    }
+
+    .links-section p a {
+        padding: 8px 12px; /* Smaller buttons */
+        margin: 3px 5px;
+    }
+
+    .publication-entry, .project-entry {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .publication-image, .project-image {
+        margin-right: 0;
+        margin-bottom: 15px;
+    }
+
+    .publication-details, .project-details {
+        align-items: center;
+        text-align: center;
+    }
+    .publication-details p, .project-details p {
+        text-align: center;
+    }
+}
+
+/* Media Query for Desktop fixed sizes */
+@media (min-width: 900px) {
+    body {
+        font-size: 15px;
+    }
+    .bio h1 {
+        font-size: 42px;
+    }
+    section h2 {
+        font-size: 28px;
+    }
+    /* nav ul li a will be 1em of 15px = 15px, which is correct. */
+    /* Other em based sizes will correctly use 15px as their base. */
 } 
