@@ -1,0 +1,542 @@
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.5;
+    margin: 0 auto; /* Remove top margin, nav will handle spacing */
+    padding: 0;
+    background-color: #fff; /* White background */
+    color: #333;
+    max-width: 900px; /* Max width similar to example */
+    font-size: 15px; /* Increased base font size slightly */
+    font-weight: 300; /* Thinner font weight for the entire page */
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Navigation Bar Styling */
+nav {
+    background-color: #fff; /* Or a subtle grey like #f8f8f8 */
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 15px; /* Reduced space between nav and main content */
+    transition: background-color 0.3s ease, border-bottom-color 0.3s ease;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    text-align: right; /* Align links to the right */
+    max-width: 900px; /* Align with main content width */
+    margin-left: auto; /* These two center the ul */
+    margin-right: auto;
+    padding-right: 20px; /* Align with container padding */
+}
+
+nav ul li {
+    display: inline-block;
+    margin-left: 20px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #007bff; /* Blue links, or #555 for more subtle */
+    font-size: 15px; /* Adjusted to match new base */
+    font-weight: 400; /* Slightly less than medium for nav links, not too thin */
+}
+
+nav ul li a:hover {
+    text-decoration: underline;
+}
+
+.container {
+    width: 100%; /* Container takes full width of body's max-width */
+    padding: 0 20px; /* Padding on sides */
+    box-sizing: border-box;
+    background-color: transparent;
+    box-shadow: none;
+}
+
+header {
+    padding-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 20px;
+}
+
+.profile-header {
+    padding-bottom: 15px; /* Reduced padding */
+    border-bottom: 1px solid #eee;
+    margin-bottom: 15px; /* Reduced space after the header block/line */
+}
+
+.profile-section {
+    display: flex;
+    align-items: center; /* Vertically center items in profile section */
+    margin-bottom: 25px;
+    padding-bottom: 25px;
+    border-bottom: none; /* Remove duplicate border if any was here */
+}
+
+.profile-pic-container {
+    margin-right: 30px;
+    flex-shrink: 0;
+}
+
+.profile-pic {
+    width: 220px;
+    height: auto;
+    border-radius: 20px;
+    object-fit: cover;
+    border: 1px solid #ddd;
+    /* display: block; and margin-bottom: 15px; are less relevant now with flex centering */
+}
+
+.bio {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center children (h1, p, email, links) */
+    margin-left: 30px; /* Add some space between pic and bio text */
+}
+
+.bio h1 {
+    font-size: 42px; /* Slightly increased from 40px */
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: #000;
+    font-weight: 400; /* Adjusted H1 weight, as 300 might be too thin for a large title */
+    text-align: center; /* Ensure centering */
+}
+
+.bio p {
+    text-align: justify;
+    font-size: 1em; /* Relative to body font size (15px) */
+    line-height: 1.6;
+    margin-bottom: 15px;
+    max-width: 600px; /* Constrain bio paragraph width */
+    align-self: stretch; /* Allow text-align:justify to work */
+}
+
+.bio p.email-link-bio {
+    text-align: center;
+    font-size: 1em; /* Relative to body font size */
+    margin-top: 10px;
+    margin-bottom: 10px;
+    max-width: none;
+}
+
+.bio p.email-link-bio a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.bio p.email-link-bio a:hover {
+    text-decoration: underline;
+}
+
+.links-section {
+    text-align: center;
+    margin-top: 15px; /* Increased space after email */
+    margin-bottom: 0;
+    font-size: 0.93em; /* Approx 14px if base is 15px */
+    padding-left: 0;
+}
+
+.links-section p {
+    margin: 0; /* Remove default paragraph margin */
+}
+
+.links-section p a {
+    display: inline-block; /* Allow padding and proper spacing */
+    padding: 10px 18px;
+    margin: 5px 8px;
+    background-color: #e9e9e9; /* Lighter grey */
+    color: #333;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 400; /* Buttons might look better not too thin */
+    transition: background-color 0.2s ease;
+}
+
+.links-section p a:hover {
+    background-color: #d0d0d0; /* Darker grey on hover */
+    text-decoration: none;
+}
+
+.section-divider {
+    display: none !important; /* Ensure all hr.section-divider are hidden */
+}
+
+/* General Section Styling */
+section {
+    margin-bottom: 15px; /* Greatly reduced space between sections */
+    padding-top: 5px; /* Reduced space above section title */
+    padding-bottom: 15px; /* Reduced space for content and before border */
+    border-bottom: 1px solid #eee;
+}
+
+section:last-of-type {
+    border-bottom: none; /* No line after the last section */
+}
+
+section h2 {
+    font-size: 28px; /* Much bigger section titles */
+    color: #333;
+    font-weight: 500; /* Section titles should still have some prominence */
+    /* text-transform: uppercase; */
+    letter-spacing: 0.5px;
+    margin-top: 0;
+    margin-bottom: 20px;
+    padding-bottom: 5px;
+    border-bottom: none; /* Removed border from under section titles */
+}
+
+/* News Section Styling (Previously Updates) */
+.news-section ul { /* Renamed from .updates-section */
+    list-style-type: none;
+    padding-left: 0;
+    font-size: 0.93em;
+    max-height: 160px;
+    overflow-y: auto;
+    border: none;
+    padding: 0; /* Removed padding here, will add to li or spans if needed */
+}
+
+.news-section li { /* Renamed from .updates-section */
+    display: flex; /* Use flexbox for two-column layout */
+    margin-bottom: 8px; /* Adjusted margin from your previous edit for li */
+    line-height: 1.5;
+    padding: 0px 0; /* Small padding for each item */
+}
+
+span.update-date {
+    flex-basis: 130px; /* Fixed width for the date column */
+    flex-shrink: 0; /* Prevent date column from shrinking */
+    margin-right: -20px; /* Space between date and description */
+    font-style: italic; /* Italicize the date part including em and strong */
+}
+
+span.update-date strong em {
+    font-weight: 300; /* Inherited from body is 300, but em might reset, ensure it's light */
+    color: #777;
+    font-style: normal; /* Counteract parent span.update-date italic if only em should be italic */
+    /* If the entire date span should be italic including strong, remove this line */
+}
+
+span.update-description {
+    flex-grow: 1; /* Description takes remaining space */
+    text-align: justify;
+}
+
+/* Education Section Styling */
+.education-entry {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
+.education-logo-container {
+    margin-right: 15px;
+    flex-shrink: 0;
+}
+
+.uni-logo {
+    width: 50px; /* Adjust as needed */
+    height: 50px;
+    object-fit: contain;
+    border: 1px solid #eee;
+}
+
+.education-details h3 {
+    font-size: 1.07em; /* Approx 16px */
+    margin-top: 0;
+    margin-bottom: 5px;
+    font-weight: 500; /* Keep some weight for sub-headings */
+}
+
+.education-details p {
+    font-size: 0.93em; /* Approx 14px */
+    margin-top: 0;
+    margin-bottom: 5px;
+    line-height: 1.4;
+}
+
+/* Publications & Projects Section Styling (Shared) */
+.publication-entry, .project-entry {
+    display: flex;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: none; /* Individual entries don't have bottom border, section does */
+}
+
+.publication-entry strong, .project-entry strong {
+    font-weight: 600;
+}
+
+.publication-entry:last-child, .project-entry:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    /* No border-bottom here if it's the true last inside a collapsible section */
+}
+
+.publication-image, .project-image {
+    margin-right: 20px;
+    flex-shrink: 0;
+}
+
+.publication-image img, .project-image img {
+    width: 220px;
+    height: auto;
+    /* border: 1px solid #ddd; */
+    margin-bottom: 5px; /* Add a small margin if text wraps under */
+}
+
+.publication-details, .project-details {
+    font-size: 0.93em;
+    /* line-height: 1.0; Parent line-height, will be overridden by p specific below */
+}
+
+.publication-details h3, .project-details h3 {
+    font-size: 1.15em; /* Approx 16px, relative to 14px */
+    font-weight: 500; /* Keep some weight for sub-headings */
+    margin-top: 0.5px;
+    margin-bottom: 0.5px;
+    color: #0056b3; /* Darker blue for titles */
+}
+
+.publication-details p, .project-details p {
+    margin-bottom: 0px; /* Keeps paragraphs close to each other */
+    line-height: 1.2; /* Slightly increased spacing for lines within this paragraph */
+}
+
+.publication-details em, .project-details em {
+    font-style: italic;
+    color: #555;
+}
+
+.publication-details a, .project-details a {
+    color: #007bff;
+    text-decoration: none;
+    margin-right: 5px;
+}
+
+.publication-details a:hover, .project-details a:hover {
+    text-decoration: underline;
+}
+
+footer {
+    text-align: center;
+    padding: 20px 0;
+    margin-top: 30px;
+    border-top: 1px solid #eee;
+    font-size: 0.9em;
+    color: #777;
+}
+
+/* Styling for the collapsible project section */
+.toggle-projects-btn {
+    display: block; /* Make it a block to take full width */
+    width: 100%; /* Stretch across its container */
+    padding: 10px 15px;
+    margin-top: 20px; /* Space above the button */
+    margin-bottom: 10px; /* Space below before hidden content */
+    background-color: #f0f0f0; /* Light grey background */
+    color: #333;
+    border: none; /* Remove default border */
+    border-radius: 5px; /* Slightly rounded corners */
+    text-align: left; /* Align text to the left like a header */
+    font-size: 1.1em; /* Slightly smaller than section headers, but larger than body */
+    font-weight: 500; /* Similar weight to section headers */
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    box-sizing: border-box; /* Ensure padding doesn't add to width */
+}
+
+.toggle-projects-btn:hover {
+    background-color: #e0e0e0; /* Darker grey on hover */
+}
+
+/* Wrapper for hidden projects - controls expand/collapse animation */
+#hidden-projects-wrapper {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease-out;
+    /* Ensure children project entries don't have unusual top margins initially */
+}
+
+#hidden-projects-wrapper.expanded {
+    max-height: 2000px; /* Adjust to accommodate all hidden projects */
+    /* Add a little space above the first hidden item when expanded */
+    /* padding-top: 15px; */ /* Optional: if you want space inside the wrapper */
+}
+
+/* Styling for individual project entries within the now visible wrapper */
+#hidden-projects-wrapper .project-entry {
+    opacity: 0;
+    transition: opacity 0.4s ease-out 0.1s; /* Delay opacity for smoother feel after expand */
+    /* Ensure normal display and margins are applied when they become part of the flow */
+    display: flex; /* Assuming .project-entry uses flex */
+    margin-bottom: 15px !important; /* Restore original margin */
+    padding-bottom: 15px !important; /* Restore original padding */
+}
+
+#hidden-projects-wrapper.expanded .project-entry {
+    opacity: 1;
+}
+
+/* Remove bottom margin/padding from the very last project entry inside the expanded wrapper */
+#hidden-projects-wrapper.expanded .project-entry:last-child {
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+/* Theme Toggle Button Styling */
+#theme-toggle {
+    background-color: transparent; /* Make background transparent for icon look */
+    color: #007bff; /* Default light mode icon color (sun) */
+    border: none;
+    padding: 5px 10px; /* Adjust padding */
+    font-size: 20px; /* Larger font size for icon */
+    font-weight: 400;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    line-height: 1; /* Ensure icon is vertically centered if text is removed */
+}
+
+#theme-toggle:hover {
+    color: #0056b3; /* Darker on hover */
+    background-color: #f0f0f0; /* Slight background on hover */
+}
+
+/* Dark Mode Styles */
+body.dark-mode {
+    background-color: #1a1a1a;
+    color: #ccc;
+}
+
+body.dark-mode nav {
+    background-color: #1a1a1a; /* Match body background */
+    border-bottom: 1px solid #444;
+}
+
+body.dark-mode nav ul li a {
+    color: #f076b9; /* Lighter magenta for links in dark mode */
+    transition: color 0.3s ease;
+}
+
+body.dark-mode .profile-header {
+    border-bottom-color: #444;
+    transition: border-bottom-color 0.3s ease;
+}
+
+body.dark-mode .profile-pic {
+    border-color: #555;
+    transition: border-color 0.3s ease;
+}
+
+body.dark-mode .bio h1 {
+    color: #e0e0e0;
+    transition: color 0.3s ease;
+}
+
+body.dark-mode .bio p {
+    color: #bbb;
+    transition: color 0.3s ease;
+}
+
+body.dark-mode .bio p a, /* Specific rule for links within bio paragraphs */
+body.dark-mode .bio a, /* General rule for any other links directly in .bio if any */
+body.dark-mode .news-section a, /* Links in news section - Renamed */
+body.dark-mode .bio p.email-link-bio a {
+    color: #f076b9; /* Lighter magenta */
+    transition: color 0.3s ease;
+}
+
+body.dark-mode .links-section p a {
+    background-color: #3a3a3a;
+    color: #ccc;
+    border: 1px solid #555;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+body.dark-mode .links-section p a:hover {
+    background-color: #4f4f4f;
+}
+
+body.dark-mode section {
+    border-bottom-color: #444;
+    transition: border-bottom-color 0.3s ease;
+}
+
+body.dark-mode section:last-of-type {
+    border-bottom: none;
+}
+
+body.dark-mode section h2 {
+    color: #d0d0d0;
+    transition: color 0.3s ease;
+}
+
+body.dark-mode .news-section ul { /* Renamed from .updates-section */
+    /* No specific background needed, inherits from body */
+}
+
+body.dark-mode span.update-date strong em {
+    color: #999;
+    transition: color 0.3s ease;
+}
+
+body.dark-mode .uni-logo {
+    border-color: #444;
+    background-color: #eee; 
+    transition: border-color 0.3s ease, background-color 0.3s ease; /* Added background transition in case it changes */
+}
+
+body.dark-mode .publication-details h3,
+body.dark-mode .project-details h3 {
+    color: #82c0ff; /* Adjusted from #66b0ff for better magenta harmony, still light blue */
+    transition: color 0.3s ease;
+}
+
+body.dark-mode .publication-details em,
+body.dark-mode .publication-details strong,
+body.dark-mode .project-details em,
+body.dark-mode .project-details strong {
+    color: inherit; /* Inherit from parent <p> or details section */
+}
+
+body.dark-mode .publication-details a,
+body.dark-mode .project-details a {
+    color: #f076b9; /* Lighter magenta */
+    transition: color 0.3s ease;
+}
+
+body.dark-mode .toggle-projects-btn {
+    background-color: #2c2c2c;
+    color: #ccc;
+    border-color: #444;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+body.dark-mode .toggle-projects-btn:hover {
+    background-color: #3a3a3a;
+}
+
+body.dark-mode footer {
+    border-top-color: #444;
+    color: #888;
+    transition: border-top-color 0.3s ease, color 0.3s ease;
+}
+
+body.dark-mode #theme-toggle {
+    color: #ffd700; /* Sun color for dark mode (moon icon will be shown) */
+    background-color: transparent;
+}
+
+body.dark-mode #theme-toggle:hover {
+    color: #ffec80; /* Lighter sun/moon on hover */
+    background-color: #2c2c2c; /* Slight background on hover in dark mode */
+} 
