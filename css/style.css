@@ -615,10 +615,10 @@ body.dark-mode #theme-toggle:hover {
 
     .publication-details, .project-details {
         align-items: center;
-        text-align: center;
+        text-align: left;
     }
     .publication-details p, .project-details p {
-        text-align: center;
+        text-align: left;
     }
 }
 
