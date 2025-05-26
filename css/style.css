@@ -111,13 +111,12 @@ header {
     text-align: center; /* Ensure centering */
 }
 
-.bio p {
-    text-align: justify;
+.bio > p {
+    text-align: left;
     font-size: 1em; /* Relative to body font size (15px) */
     line-height: 1.6;
     margin-bottom: 15px;
     max-width: 600px; /* Constrain bio paragraph width */
-    align-self: stretch; /* Allow text-align:justify to work */
 }
 
 .bio p.email-link-bio {
@@ -444,7 +443,7 @@ body.dark-mode .bio h1 {
     transition: color 0.3s ease;
 }
 
-body.dark-mode .bio p {
+body.dark-mode .bio > p {
     color: #bbb;
     transition: color 0.3s ease;
 }
@@ -560,9 +559,9 @@ body.dark-mode #theme-toggle:hover {
         align-items: center; /* Center bio content */
     }
 
-    .bio p {
-        text-align: center; /* Center bio text on smaller screens */
-        align-self: center; /* Ensure it centers if flex properties interfere */
+    .bio > p {
+        text-align: left;   /* Left-align bio text on smaller screens */
+        align-self: center; /* Ensure the paragraph block itself is centered */
     }
 
     nav ul {
@@ -595,7 +594,7 @@ body.dark-mode #theme-toggle:hover {
     }
 
     section h2 {
-        font-size: calc(1.8vw + 0.8em); /* Adjust H2 for very small screens */
+        font-size: calc(1vw + 1.27em); /* Adjust H2 for very small screens */
     }
 
     .links-section p a {
