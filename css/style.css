@@ -369,7 +369,7 @@ footer {
 }
 
 #hidden-projects-wrapper.expanded {
-    max-height: 2000px; /* Adjust to accommodate all hidden projects */
+    max-height: 10000px; /* Increased to accommodate all hidden projects, especially on mobile */
     /* Add a little space above the first hidden item when expanded */
     /* padding-top: 15px; */ /* Optional: if you want space inside the wrapper */
 }
@@ -611,14 +611,21 @@ body.dark-mode #theme-toggle:hover {
     .publication-image, .project-image {
         margin-right: 0;
         margin-bottom: 15px;
+        width: 100%; /* Make the image container full-width */
+    }
+
+    /* Add new rule for images specifically on mobile */
+    .publication-image img, .project-image img {
+        max-width: 100%; /* Allow image to fill its container, overriding desktop max-width */
     }
 
     .publication-details, .project-details {
-        align-items: center;
-        text-align: left;
+        /* align-items: center; Removed, as parent handles centering and this is for flex children */
+        text-align: left; 
+        width: 100%; /* Make the details block full-width */
     }
     .publication-details p, .project-details p {
-        text-align: left;
+        text-align: left; 
     }
 }
 
