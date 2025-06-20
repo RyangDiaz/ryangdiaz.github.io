@@ -269,6 +269,7 @@ span.update-description {
     margin-bottom: 15px;
     padding-bottom: 15px;
     border-bottom: none; /* Individual entries don't have bottom border, section does */
+    align-items: center;
 }
 
 .publication-entry strong, .project-entry strong {
