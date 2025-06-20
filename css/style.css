@@ -266,8 +266,8 @@ span.update-description {
 /* Publications & Projects Section Styling (Shared) */
 .publication-entry, .project-entry {
     display: flex;
-    margin-bottom: 15px;
-    padding-bottom: 15px;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
     border-bottom: none; /* Individual entries don't have bottom border, section does */
     align-items: center;
 }
@@ -303,13 +303,15 @@ span.update-description {
 .publication-details h3, .project-details h3 {
     font-size: 1.15em; /* Approx 16px, relative to 14px */
     font-weight: 500; /* Keep some weight for sub-headings */
-    margin-top: 0.5px;
-    margin-bottom: 0.5px;
+    margin-top: 0.2px;
+    margin-bottom: 0.2px;
     color: #0056b3; /* Darker blue for titles */
+    line-height: 1.2;
 }
 
 .publication-details p, .project-details p {
-    margin-bottom: 0px; /* Keeps paragraphs close to each other */
+    margin-top: 13px;
+    margin-bottom: 13px; /* Keeps paragraphs close to each other */
     line-height: 1.2; /* Slightly increased spacing for lines within this paragraph */
 }
 
