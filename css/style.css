@@ -293,6 +293,8 @@ span.update-description {
     height: auto;
     /* border: 1px solid #ddd; */
     margin-bottom: 5px; /* Add a small margin if text wraps under */
+    border-radius: 15px;
+    border: 1px solid #ddd;
 }
 
 .publication-details, .project-details {
