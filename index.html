@@ -4,11 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ryan Diaz</title>
+    <!-- Apply the saved theme before first paint so there's no flash and the
+         unified color transitions don't fire on load. -->
+    <script>
+        (function () {
+            try { if (localStorage.getItem('theme') === 'dark') document.documentElement.classList.add('dark-mode'); } catch (e) {}
+        })();
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700&display=swap">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+    <canvas class="bg-dots" aria-hidden="true"></canvas>
     <nav>
         <ul>
+            <li class="nav-name-item"><a href="#" id="nav-name" class="nav-name" aria-label="Back to top">Ryan Diaz</a></li>
             <li><a href="#news-section">News</a></li>
             <li><a href="#publications-section">Publications</a></li>
             <li><a href="#projects-section">Projects</a></li>
@@ -28,24 +40,26 @@
                     <p>My research interests involve active learning, human-robot collaboration, and lifelong learning in robotics. I aim to build agents that can proactively adapt to their human teammates and generalize inferred preferences to a wide variety of tasks. I'm always trying to help humans and robots do cool things!</p>
                     <p>Previously, I was an undergraduate at the University of Minnesota where I worked with <a href="https://karthikdesingh.com" target="_blank">Prof. Karthik Desingh</a> at the <a href="https://rpm-lab.github.io" target="_blank">Robotics: Perception and Manipulation Lab</a> on multisensory contact-rich robotic manipulation. I also got the chance to do research on reinforcement learning for autonomous driving with <a href="https://engineering.wustl.edu/faculty/Yevgeniy-Vorobeychik.html" target="_blank">Prof. Yevgeniy Vorobeychik</a> at the <a href="https://sites.wustl.edu/csereu/" target="_blank">WashU CSE REU</a>.</p>
                     <!-- <p>Outside of academics and research, I enjoy cooking, reading, and worldbuilding (as well as procrastinating way too much on actually writing). Whether it be writing papers, writing code, or writing stories, the keyboard always calls...</p> -->
-                    <p class="email-link-bio"><a href="mailto:ryandiaz@rice.edu">ryandiaz@rice.edu</a> / <a href="mailto:diazryan.g@gmail.com">diazryan.g@gmail.com</a> </p>
-                    <div class="links-section">
-                        <p>
-                            <a href="assets/pdf/PhD_CV.pdf" target="_blank">CV</a> 
-                            <a href="https://www.linkedin.com/in/ryan-diaz-a9b443251/" target="_blank">LinkedIn</a> 
-                            <a href="https://github.com/RyangDiaz" target="_blank">GitHub</a> 
-                            <a href="https://scholar.google.com/citations?hl=en&user=ktFq4uoAAAAJ" target="_blank">Google Scholar</a> 
-                        </p>
-                    </div>
+                </div>
+            </div>
+            <div class="bio-footer">
+                <p class="email-link-bio"><a href="mailto:ryandiaz@rice.edu">ryandiaz@rice.edu</a> / <a href="mailto:diazryan.g@gmail.com">diazryan.g@gmail.com</a> </p>
+                <div class="links-section">
+                    <p>
+                        <a href="assets/pdf/PhD_CV.pdf" target="_blank">CV</a>
+                        <a href="https://www.linkedin.com/in/ryan-diaz-a9b443251/" target="_blank">LinkedIn</a>
+                        <a href="https://github.com/RyangDiaz" target="_blank">GitHub</a>
+                        <a href="https://scholar.google.com/citations?hl=en&user=ktFq4uoAAAAJ" target="_blank">Google Scholar</a>
+                    </p>
                 </div>
             </div>
         </header>
 
-        <hr class="section-divider">
-
-        <!-- News Section (Previously Updates) -->
+        <!-- News Section -->
         <section class="news-section" id="news-section">
-            <h2>News</h2>
+            <div class="section-header">
+                <h1>News</h1>
+            </div>
             <ul>
                 <li><span class="update-date"><strong><em>[04/12/2026]</em></strong> </span> <span class="update-description">I was awarded the 2026 <a href="https://www.nsfgrfp.org" target="_blank">NSF Graduate Research Fellowship</a>!</span></li>
                 <li><span class="update-date"><strong><em>[12/19/2025]</em></strong> </span> <span class="update-description">Our project <a href="https://arxiv.org/abs/2602.18582" target="_blank">Hierarchical Reward Design from Language</a> was accepted to <a href="https://cyprusconferences.org/aamas2026/" target="_blank">AAMAS 2026</a> as a full paper. See you in Paphos, Cyprus!</span></li>
@@ -64,11 +78,12 @@
             </ul>
         </section>
 
-        <hr class="section-divider">
-
         <!-- Publications Section -->
         <section class="publications-section" id="publications-section">
-            <h2>Publications</h2>
+            <div class="section-header">
+                <h1>Publications</h1>
+                <span class="section-note">*denotes equal contribution</span>
+            </div>
 
             <div class="publication-entry">
                 <div class="publication-image">
@@ -126,12 +141,12 @@
             </div>
         </section>
 
-        <hr class="section-divider">
-
         <!-- Projects Section -->
         <section class="projects-section" id="projects-section">
-            <h2>Projects</h2>
-            <div class="project-entry publication-entry show"> <!-- Entry 1 -->
+            <div class="section-header">
+                <h1>Projects</h1>
+            </div>
+            <div class="project-entry publication-entry featured"> <!-- Entry 1 -->
                 <div class="project-image publication-image">
                     <img src="assets/img/projects/robot_data_filter.pdf" alt="robot data folder thumbnail">
                 </div>
@@ -146,7 +161,7 @@
                 </div>
             </div>
 
-            <div class="project-entry publication-entry show"> <!-- Entry 1 -->
+            <div class="project-entry publication-entry featured"> <!-- Entry 1 -->
                 <div class="project-image publication-image">
                     <img src="assets/img/projects/vtmae.png" alt="vtmae thumbnail">
                 </div>
@@ -161,7 +176,7 @@
                 </div>
             </div>
 
-            <div class="project-entry publication-entry show"> <!-- Entry 2 -->
+            <div class="project-entry publication-entry featured"> <!-- Entry 2 -->
                 <div class="project-image publication-image">
                     <img src="assets/img/projects/obstacle_avoidance.gif" alt="obstacle avoidance gif">
                 </div>
@@ -178,7 +193,7 @@
                 </div>
             </div>
             
-            <div class="project-entry publication-entry hide"> <!-- Entry 3 -->
+            <div class="project-entry publication-entry"> <!-- Entry 3 -->
                 <div class="project-image publication-image">
                     <img src="assets/img/projects/fourier_features.gif" alt="fourier features gif">
                 </div>
@@ -193,9 +208,9 @@
                 </div>
             </div>
 
-            <button type="button" class="toggle-projects-btn" id="toggle-more-projects">More Projects ▼</button>
+            <button type="button" class="toggle-btn toggle-projects-btn" id="toggle-more-projects">More Projects ▼</button>
 
-            <div class="project-entry publication-entry hide"> <!-- Entry 4 (Initially hidden) -->
+            <div class="project-entry publication-entry"> <!-- Entry 4 (Initially hidden) -->
                 <div class="project-image publication-image">
                     <img src="assets/img/projects/news_political_bias.png" alt="political bias in news thumbnail">
                 </div>
@@ -211,7 +226,7 @@
                 </div>
             </div>
 
-            <div class="project-entry publication-entry hide"> <!-- Entry 5 (Initially hidden) -->
+            <div class="project-entry publication-entry"> <!-- Entry 5 (Initially hidden) -->
                 <div class="project-image publication-image">
                     <img src="assets/img/projects/nerf_sam_seg.gif" alt="nerf sam seg gif">
                 </div>
@@ -225,7 +240,7 @@
                 </div>
             </div>
 
-            <div class="project-entry publication-entry hide"> <!-- Entry 5 (Initially hidden) -->
+            <div class="project-entry publication-entry"> <!-- Entry 5 (Initially hidden) -->
                 <div class="project-image publication-image">
                     <img src="assets/img/projects/slot_diffusion_policy.png" alt="slot diffusion policy gif">
                 </div>
@@ -240,7 +255,7 @@
                 </div>
             </div>
 
-            <div class="project-entry publication-entry hide"> <!-- Entry 5 (Initially hidden) -->
+            <div class="project-entry publication-entry"> <!-- Entry 5 (Initially hidden) -->
                 <div class="project-image publication-image">
                     <img src="assets/img/projects/blender_obj_generation.png" alt="blender obj generation thumbnail">
                 </div>
@@ -256,7 +271,7 @@
                 </div>
             </div>
 
-            <div class="project-entry publication-entry hide"> <!-- Entry 5 (Initially hidden) -->
+            <div class="project-entry publication-entry"> <!-- Entry 5 (Initially hidden) -->
                 <div class="project-image publication-image">
                     <img src="assets/img/projects/freecell_ai.png" alt="freecell ai thumbnail">
                 </div>
@@ -271,7 +286,7 @@
                 </div>
             </div>
 
-            <div class="project-entry publication-entry hide"> <!-- Entry 5 (Initially hidden) -->
+            <div class="project-entry publication-entry"> <!-- Entry 5 (Initially hidden) -->
                 <div class="project-image publication-image">
                     <img src="assets/img/projects/wrsct.gif" alt="wrsct gif">
                 </div>
@@ -288,100 +303,325 @@
 
     </div>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const projectsSection = document.getElementById('projects-section');
-            const toggleButton = document.getElementById('toggle-more-projects');
+        document.addEventListener('DOMContentLoaded', function () {
+
+            // ===== Theme toggle =====
+            // The dark-mode class is applied pre-paint by the inline <head> script;
+            // here we just sync the button icon and wire up the toggle.
+            const themeBtn = document.getElementById('theme-toggle');
+            themeBtn.textContent = document.documentElement.classList.contains('dark-mode') ? '🌙' : '☀️';
+            themeBtn.addEventListener('click', function () {
+                document.documentElement.classList.toggle('dark-mode');
+                const isDark = document.documentElement.classList.contains('dark-mode');
+                themeBtn.textContent = isDark ? '🌙' : '☀️';
+                localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            });
+
+            // ===== Nav name: reveal once the hero "Ryan Diaz" heading scrolls behind the nav =====
+            var navName = document.getElementById('nav-name');
+            var heroName = document.querySelector('.bio h1');
+            if (navName && heroName && 'IntersectionObserver' in window) {
+                var nav = document.querySelector('nav');
+                var navH = nav ? nav.offsetHeight : 0;
+                var nameObserver = new IntersectionObserver(function (entries) {
+                    // Hidden while the hero name is visible above the nav; shown once it's gone.
+                    navName.classList.toggle('is-visible', !entries[0].isIntersecting);
+                }, { rootMargin: '-' + navH + 'px 0px 0px 0px', threshold: 0 });
+                nameObserver.observe(heroName);
+
+                navName.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            }
+
+            // ===== Dot-grid canvas: independent fading dots + scroll parallax =====
+            // Each grid cell's opacity follows a sine wave with its own phase and speed,
+            // keyed to its world coordinates so the fade stays continuous as the field
+            // parallax-scrolls. PARALLAX: 0 = static, 1 = moves with content.
+            (function () {
+                var canvas = document.querySelector('canvas.bg-dots');
+                if (!canvas || !canvas.getContext) return;
+                var ctx = canvas.getContext('2d');
+
+                var SPACING = 15;       // gap between dots (px) — larger = fewer dots to draw
+                var RADIUS = 1.3;       // dot radius (px) — slightly bigger than before
+                var MAX_ALPHA = 0.45;   // peak opacity of a dot
+                var FADE_SPEED = 5;     // fade rate multiplier (1 = base, higher = faster)
+                var PARALLAX = 0.0;
+                var FPS = 30;           // animation frame cap (the fade is slow; 60 = uncapped)
+                var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+                var dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+                // Sine lookup table — lets the draw loop replace a per-dot Math.sin with an
+                // array read. Power-of-two size so we can wrap the index with a bitmask.
+                var TWO_PI = Math.PI * 2, TABLE = 1024, TABLE_MASK = TABLE - 1;
+                var TABLE_OVER_2PI = TABLE / TWO_PI;
+                var SIN = new Float32Array(TABLE);
+                for (var si = 0; si < TABLE; si++) SIN[si] = Math.sin(si / TABLE * TWO_PI);
+
+                // Dot color (RGB) from the --dot-color CSS variable. On theme change we tween the
+                // color over COLOR_DUR (matching the CSS color transitions) so the background fades
+                // in step with the foreground instead of snapping. The sprite canvas/context are
+                // created once and just repainted, so toggles don't accumulate detached canvases.
+                var COLOR_DUR = 300; // ms — keep in sync with the CSS 0.3s transitions
+                var curRGB = [99, 120, 160], fromRGB = [99, 120, 160], toRGB = [99, 120, 160];
+                var colorT0 = 0, colorAnimating = false, reduceLoopRunning = false;
+                var spriteHalf = RADIUS + 1;
+                var sprite = document.createElement('canvas');
+                sprite.width = sprite.height = Math.ceil(spriteHalf * 2 * dpr);
+                var spriteCtx = sprite.getContext('2d');
+                function buildSprite() {
+                    spriteCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+                    spriteCtx.clearRect(0, 0, spriteHalf * 2, spriteHalf * 2);
+                    spriteCtx.fillStyle = 'rgb(' + (curRGB[0] | 0) + ',' + (curRGB[1] | 0) + ',' + (curRGB[2] | 0) + ')';
+                    spriteCtx.beginPath();
+                    spriteCtx.arc(spriteHalf, spriteHalf, RADIUS, 0, Math.PI * 2);
+                    spriteCtx.fill();
+                }
+                function targetColor() {
+                    var c = getComputedStyle(document.documentElement).getPropertyValue('--dot-color');
+                    var m = c.match(/(\d+)\s*,\s*(\d+)\s*,\s*(\d+)/);
+                    return m ? [+m[1], +m[2], +m[3]] : curRGB.slice();
+                }
+                function ease(p) { return p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2; }
+                // Advance the color tween to time `nowMs`; returns false once finished.
+                function stepColor(nowMs) {
+                    if (!colorAnimating) return false;
+                    var p = (nowMs - colorT0) / COLOR_DUR;
+                    if (p >= 1) { p = 1; colorAnimating = false; }
+                    var e = ease(p);
+                    curRGB[0] = fromRGB[0] + (toRGB[0] - fromRGB[0]) * e;
+                    curRGB[1] = fromRGB[1] + (toRGB[1] - fromRGB[1]) * e;
+                    curRGB[2] = fromRGB[2] + (toRGB[2] - fromRGB[2]) * e;
+                    buildSprite();
+                    return true;
+                }
+                // Drive the tween under prefers-reduced-motion, where the main loop isn't running.
+                function reduceColorLoop(nowMs) {
+                    var more = stepColor(nowMs);
+                    draw(0);
+                    if (more) window.requestAnimationFrame(reduceColorLoop);
+                    else reduceLoopRunning = false;
+                }
+                function startColorTransition() {
+                    fromRGB = curRGB.slice();
+                    toRGB = targetColor();
+                    colorT0 = performance.now();
+                    colorAnimating = true;
+                    if (reduce && !reduceLoopRunning) { reduceLoopRunning = true; reduceColorLoop(colorT0); }
+                }
+                curRGB = targetColor(); // initial color, applied instantly
+                buildSprite();
+                new MutationObserver(startColorTransition).observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+
+                // Deterministic 0..1 hash per (column, world-row) so a dot keeps its rhythm
+                function hash(a, b) {
+                    var x = Math.sin(a * 127.1 + b * 311.7) * 43758.5453;
+                    return x - Math.floor(x);
+                }
+
+                // Per-cell phase/speed are time-invariant, so precompute them into arrays and
+                // only rebuild when the grid resizes or the field scrolls past a row boundary.
+                var W, H, cols, rows, phase, speed, lastStartRow;
+                function buildCells(startRow) {
+                    for (var r = 0; r < rows; r++) {
+                        var worldRow = startRow + r, base = r * cols;
+                        for (var c = 0; c < cols; c++) {
+                            phase[base + c] = hash(c, worldRow) * TWO_PI;
+                            speed[base + c] = (0.25 + hash(c + 0.5, worldRow + 0.5) * 0.7) * FADE_SPEED;
+                        }
+                    }
+                    lastStartRow = startRow;
+                }
+
+                function resize() {
+                    W = window.innerWidth; H = window.innerHeight;
+                    canvas.width = Math.floor(W * dpr);
+                    canvas.height = Math.floor(H * dpr);
+                    canvas.style.width = W + 'px';
+                    canvas.style.height = H + 'px';
+                    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+                    cols = Math.ceil(W / SPACING) + 1;
+                    rows = Math.ceil(H / SPACING) + 2;
+                    phase = new Float32Array(cols * rows);
+                    speed = new Float32Array(cols * rows);
+                    lastStartRow = null; // force a rebuild on the next draw
+                }
+                resize();
+                window.addEventListener('resize', resize);
+
+                var scrollY = window.scrollY || 0;
+                window.addEventListener('scroll', function () { scrollY = window.scrollY; }, { passive: true });
+
+                function draw(tSeconds) {
+                    var shift = scrollY * PARALLAX;
+                    var startRow = Math.floor(shift / SPACING);
+                    var subOffset = shift - startRow * SPACING;
+                    if (startRow !== lastStartRow) buildCells(startRow);
+
+                    ctx.clearRect(0, 0, W, H);
+                    var spriteSize = spriteHalf * 2;
+                    for (var r = 0; r < rows; r++) {
+                        var y = r * SPACING - subOffset - spriteHalf;
+                        var base = r * cols;
+                        for (var c = 0; c < cols; c++) {
+                            var idx = base + c;
+                            var s = SIN[((tSeconds * speed[idx] + phase[idx]) * TABLE_OVER_2PI) & TABLE_MASK];
+                            var a = (0.5 + 0.5 * s) * MAX_ALPHA;
+                            if (a < 0.02) continue; // skip dots that are effectively invisible
+                            ctx.globalAlpha = a;
+                            ctx.drawImage(sprite, c * SPACING - spriteHalf, y, spriteSize, spriteSize);
+                        }
+                    }
+                    ctx.globalAlpha = 1;
+                }
+
+                if (reduce) {
+                    // No animation: draw the field once (and on resize/scroll) at a static opacity
+                    var ticking = false;
+                    var drawStatic = function () { draw(0); ticking = false; };
+                    drawStatic();
+                    window.addEventListener('resize', drawStatic);
+                    window.addEventListener('scroll', function () {
+                        if (!ticking) { ticking = true; window.requestAnimationFrame(drawStatic); }
+                    }, { passive: true });
+                } else {
+                    var frameInterval = 1000 / FPS;
+                    var start = performance.now();
+                    var lastDraw = 0;
+                    (function frame(now) {
+                        window.requestAnimationFrame(frame);
+                        if (now - lastDraw < frameInterval) return; // cap the frame rate
+                        lastDraw = now;
+                        stepColor(now); // advance the theme-color tween, if any
+                        draw((now - start) / 1000);
+                    })(start);
+                }
+            })();
+
+            // ===== GIF freeze/play =====
+            // On page load: capture first frame of each GIF to a canvas overlay (frozen).
+            // On mouseenter: hide canvas so the live GIF plays.
+            // On mouseleave: re-capture current frame to canvas (re-freezes).
+            document.querySelectorAll('.publication-entry, .project-entry').forEach(function (entry) {
+                var img = entry.querySelector('img');
+                if (!img || img.src.toLowerCase().indexOf('.gif') === -1) return;
+
+                var container = img.parentElement;
+                var canvas = document.createElement('canvas');
+                canvas.style.cssText = 'position:absolute;top:0;left:0;border-radius:10px;pointer-events:none;display:none';
+                container.appendChild(canvas);
+
+                function captureFrame() {
+                    var w = img.offsetWidth;
+                    var h = img.offsetHeight;
+                    if (!w || !h) return;
+                    // Back the canvas at device-pixel resolution so the frozen frame is as crisp
+                    // as the live GIF on HiDPI/Retina screens (CSS-pixel sizing looked blurry).
+                    var dpr = window.devicePixelRatio || 1;
+                    canvas.width = Math.round(w * dpr);
+                    canvas.height = Math.round(h * dpr);
+                    canvas.style.width = w + 'px';
+                    canvas.style.height = h + 'px';
+                    var c = canvas.getContext('2d');
+                    c.imageSmoothingQuality = 'high';
+                    c.drawImage(img, 0, 0, canvas.width, canvas.height);
+                    canvas.style.display = 'block';
+                }
+
+                if (img.complete && img.naturalWidth > 0) {
+                    captureFrame();
+                } else {
+                    img.addEventListener('load', captureFrame, { once: true });
+                }
+
+                entry.addEventListener('mouseenter', function () { canvas.style.display = 'none'; });
+                entry.addEventListener('mouseleave', function () { captureFrame(); });
+            });
+
+            // ===== News section: More News button =====
+            var newsSection = document.getElementById('news-section');
+            if (newsSection) {
+                var newsList = newsSection.querySelector('ul');
+                if (newsList) {
+                    var allItems = Array.from(newsList.querySelectorAll('li'));
+                    var VISIBLE = 5;
+                    if (allItems.length > VISIBLE) {
+                        var hiddenItems = allItems.slice(VISIBLE);
+
+                        var newsWrapper = document.createElement('div');
+                        newsWrapper.id = 'hidden-news-wrapper';
+                        var hiddenList = document.createElement('ul');
+                        hiddenItems.forEach(function (item) { item.remove(); hiddenList.appendChild(item); });
+                        newsWrapper.appendChild(hiddenList);
+
+                        var newsBtn = document.createElement('button');
+                        newsBtn.type = 'button';
+                        newsBtn.className = 'toggle-btn';
+                        newsBtn.id = 'toggle-more-news';
+                        newsBtn.textContent = 'More News ▼';
+
+                        newsList.after(newsWrapper);
+                        newsWrapper.after(newsBtn);
+
+                        newsBtn.addEventListener('click', function () {
+                            var expanding = !newsWrapper.classList.contains('expanded');
+                            newsWrapper.classList.toggle('expanded');
+                            newsBtn.textContent = expanding ? 'Less News ▲' : 'More News ▼';
+                        });
+                    }
+                }
+            }
+
+            // ===== Projects section: More Projects button =====
+            // Uses 'featured' class to identify entries shown by default.
+            var projectsSection = document.getElementById('projects-section');
+            var toggleButton = document.getElementById('toggle-more-projects');
 
             if (!projectsSection || !toggleButton) {
-                if (toggleButton) toggleButton.style.display = 'none'; // Hide button if section not found
+                if (toggleButton) toggleButton.style.display = 'none';
                 return;
             }
 
-            const allProjects = Array.from(projectsSection.querySelectorAll('.project-entry'));
-            const showProjects = allProjects.filter(p => p.classList.contains('show'));
-            const hideProjectsInitial = allProjects.filter(p => p.classList.contains('hide'));
+            var allProjects = Array.from(projectsSection.querySelectorAll('.project-entry'));
+            var featuredProjects = allProjects.filter(function (p) { return p.classList.contains('featured'); });
+            var hiddenProjects = allProjects.filter(function (p) { return !p.classList.contains('featured'); });
 
-            // Create a wrapper for hideable projects
-            const hiddenProjectsWrapper = document.createElement('div');
-            hiddenProjectsWrapper.id = 'hidden-projects-wrapper';
-            // This wrapper will be styled by CSS for expand/collapse effect
-
-            // Detach existing elements that will be reordered
-            showProjects.forEach(p => p.remove());
-            hideProjectsInitial.forEach(p => p.remove()); // These will go into the wrapper
+            allProjects.forEach(function (p) { p.remove(); });
             toggleButton.remove();
 
-            // Append "show" projects first
-            showProjects.forEach(project => projectsSection.appendChild(project));
+            featuredProjects.forEach(function (p) { projectsSection.appendChild(p); });
 
-            // Append the toggle button if there are projects to hide
-            if (hideProjectsInitial.length > 0) {
+            if (hiddenProjects.length > 0) {
+                var projectsWrapper = document.createElement('div');
+                projectsWrapper.id = 'hidden-projects-wrapper';
+                hiddenProjects.forEach(function (p) { projectsWrapper.appendChild(p); });
+                projectsSection.appendChild(projectsWrapper);
                 projectsSection.appendChild(toggleButton);
-            } else {
-                toggleButton.style.display = 'none'; // Hide button if no 'hide' projects
-            }
-            
-            // Populate and append the wrapper for "hide" projects
-            hideProjectsInitial.forEach(project => hiddenProjectsWrapper.appendChild(project));
-            if (hideProjectsInitial.length > 0) {
-                projectsSection.appendChild(hiddenProjectsWrapper);
-            }
 
-            // Event listener for the toggle button
-            if (hideProjectsInitial.length > 0) {
-                toggleButton.addEventListener('click', function() {
-                    const isOpening = !hiddenProjectsWrapper.classList.contains('expanded');
-                    hiddenProjectsWrapper.classList.toggle('expanded');
-
-                    if (isOpening) {
-                        setTimeout(() => {
-                            const buttonRect = toggleButton.getBoundingClientRect();
-                            const bodyRect = document.body.getBoundingClientRect();
-                            const viewportHeight = window.innerHeight;
-                            const documentHeight = document.documentElement.scrollHeight;
-                            
-                            let targetScrollY = buttonRect.top - bodyRect.top - 10;
-                            const maxScrollY = documentHeight - viewportHeight;
-                            const finalScrollY = Math.min(targetScrollY, maxScrollY);
-
-                            window.scrollTo({
-                                top: finalScrollY,
-                                behavior: 'smooth'
-                            });
-                        }, 50); 
-                        
+                toggleButton.addEventListener('click', function () {
+                    var opening = !projectsWrapper.classList.contains('expanded');
+                    if (opening) {
+                        projectsWrapper.classList.add('expanded');
                         toggleButton.textContent = 'Less Projects ▲';
                     } else {
+                        // Re-clip before collapsing so the slide-up animation stays contained
+                        projectsWrapper.style.overflow = 'hidden';
+                        projectsWrapper.classList.remove('expanded');
                         toggleButton.textContent = 'More Projects ▼';
                     }
                 });
-            }
-        });
-    </script>
-    <script>
-        // Theme toggle script
-        document.addEventListener('DOMContentLoaded', function() {
-            const themeToggleButton = document.getElementById('theme-toggle');
-            const currentTheme = localStorage.getItem('theme');
 
-            if (currentTheme === 'dark') {
-                document.body.classList.add('dark-mode');
-                themeToggleButton.textContent = '🌙';
+                // Once the expand animation finishes, allow overflow so hover scale/glow isn't clipped
+                projectsWrapper.addEventListener('transitionend', function (e) {
+                    if (e.propertyName === 'max-height' && projectsWrapper.classList.contains('expanded')) {
+                        projectsWrapper.style.overflow = 'visible';
+                    }
+                });
             } else {
-                themeToggleButton.textContent = '☀️';
+                toggleButton.style.display = 'none';
             }
-
-            themeToggleButton.addEventListener('click', function() {
-                document.body.classList.toggle('dark-mode');
-                let theme = 'light';
-                if (document.body.classList.contains('dark-mode')) {
-                    theme = 'dark';
-                    themeToggleButton.textContent = '🌙';
-                } else {
-                    themeToggleButton.textContent = '☀️';
-                }
-                localStorage.setItem('theme', theme);
-            });
         });
     </script>
 </body>
