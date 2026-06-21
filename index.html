@@ -317,6 +317,17 @@
                 localStorage.setItem('theme', isDark ? 'dark' : 'light');
             });
 
+            // ===== Keep anchor scrolling clear of the sticky nav (so section headings aren't covered) =====
+            var navEl = document.querySelector('nav');
+            if (navEl) {
+                var SCROLL_GAP = 12;
+                var syncScrollPadding = function () {
+                    document.documentElement.style.scrollPaddingTop = (navEl.offsetHeight + SCROLL_GAP) + 'px';
+                };
+                syncScrollPadding();
+                window.addEventListener('resize', syncScrollPadding, { passive: true });
+            }
+
             // ===== Nav name: reveal once the hero "Ryan Diaz" heading scrolls behind the nav =====
             var navName = document.getElementById('nav-name');
             var heroName = document.querySelector('.bio h1');

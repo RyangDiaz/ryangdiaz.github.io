@@ -93,6 +93,7 @@ footer {
 /* ===== Base ===== */
 html {
     scroll-behavior: smooth;
+    scroll-padding-top: 72px; /* keep the sticky nav from covering anchored section headings; refined by JS */
     background-color: var(--ground);
     transition: background-color 0.3s ease;
 }
