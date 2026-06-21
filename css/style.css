@@ -1,649 +1,747 @@
+/* ===== Custom Properties ===== */
+:root {
+    --ground: #F4F7FC;
+    --surface: #FFFFFF;
+    --border: #E2E8F0;
+    --border-card: #E2E8F0;
+    --text-primary: #0F172A;
+    --text-secondary: #64748B;
+    --text-muted: #94A3B8;
+    --accent: #1E40AF;
+    --accent-light: #DBEAFE;
+    --accent-mid: rgba(30, 64, 175, 0.12);
+    --card-bg: #FFFFFF;
+    --card-shadow: 0 1px 3px rgba(15, 23, 42, 0.06), 0 1px 2px rgba(15, 23, 42, 0.04);
+    --card-shadow-hover: 0 12px 32px rgba(30, 64, 175, 0.13), 0 4px 10px rgba(30, 64, 175, 0.07);
+    --btn-bg: #EEF2FF;
+    --btn-color: #1E40AF;
+    --btn-hover: #E0E7FF;
+    --toggle-border: #CBD5E1;
+    --toggle-color: #475569;
+    --nav-bg: rgba(244, 247, 252, 0.94);
+    --dot-color: rgba(99, 120, 160, 0.22);
+    --profile-border: #E2E8F0;
+}
+
+html.dark-mode {
+    --ground: #0B0E1A;
+    --surface: #111827;
+    --border: #1E2844;
+    --border-card: #1A2540;
+    --text-primary: #E2E8F0;
+    --text-secondary: #94A3B8;
+    --text-muted: #64748B;
+    --accent: #60A5FA;
+    --accent-light: #172554;
+    --accent-mid: rgba(96, 165, 250, 0.12);
+    --card-bg: #111827;
+    --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.45), 0 1px 2px rgba(0, 0, 0, 0.3);
+    --card-shadow-hover: 0 12px 32px rgba(0, 0, 0, 0.55), 0 4px 10px rgba(0, 0, 0, 0.38);
+    --btn-bg: #1E2A42;
+    --btn-color: #93C5FD;
+    --btn-hover: #243352;
+    --toggle-border: #2D3F60;
+    --toggle-color: #94A3B8;
+    --nav-bg: rgba(11, 14, 26, 0.95);
+    --dot-color: rgba(30, 80, 200, 0.16);
+    --profile-border: #1E2844;
+}
+
+/* Unified theme fade: every element transitions its theme-dependent surfaces over
+   the same 0.3s, so toggling light/dark fades the whole page together instead of
+   some parts snapping. Elements that declare their own `transition` (nav, cards,
+   buttons, etc.) keep it and already include the relevant properties. The saved
+   theme is applied pre-paint, so these transitions don't fire on initial load.
+
+   NOTE: `color` is intentionally NOT transitioned here. It's an inherited property,
+   and Safari compounds the ease at every nesting level when each container also
+   transitions color, making deeply-nested text fade noticeably slower. Instead,
+   `body` transitions color (so inheriting text follows it live in one pass) and the
+   rule below adds a color transition only to elements that set their own color. */
+*,
+*::before,
+*::after {
+    transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, fill 0.3s ease;
+}
+
+/* Color transition only for elements that set an explicit color, so they fade with
+   the theme without re-introducing Safari's nested-inheritance lag. */
+.bio h1,
+.bio > p,
+.bio > p a,
+.email-link-bio,
+.email-link-bio a,
+.section-note,
+section h1,
+span.update-date strong em,
+.news-section a,
+.publication-details h3,
+.project-details h3,
+.publication-details p,
+.project-details p,
+.publication-details em,
+.project-details em,
+.publication-details a,
+.project-details a {
+    transition: color 0.3s ease;
+}
+
+footer {
+    transition: color 0.3s ease, border-color 0.3s ease;
+}
+
+/* ===== Base ===== */
 html {
     scroll-behavior: smooth;
+    background-color: var(--ground);
+    transition: background-color 0.3s ease;
+}
+
+/* Dot-grid layer: a fixed full-viewport canvas. JS draws each dot, fading them
+   in/out independently and applying scroll parallax. References the occupancy
+   grids of robotics. */
+.bg-dots {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* Hide the background dots behind text-heavy areas for readability. var(--ground)
+   matches the page background, and the soft shadow fades the dots out around each
+   block rather than cutting them off with a hard edge. Cards are excluded since
+   they already have their own background. */
+.bio,
+.bio-footer,
+.section-header,
+.news-section ul {
+    background-color: var(--ground);
+    box-shadow: 0 0 10px 6px var(--ground);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    line-height: 1.5;
-    margin: 0 auto; /* Remove top margin, nav will handle spacing */
+    font-family: 'Schibsted Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    margin: 0 auto;
     padding: 0;
-    background-color: #fff; /* White background */
-    color: #333;
-    max-width: 900px; /* Max width similar to example */
-    font-size: calc(0.5vw + 0.65625rem); /* Responsive base font size for < 900px */
-    font-weight: 300; /* Thinner font weight for the entire page */
+    background-color: transparent;
+    color: var(--text-primary);
+    max-width: 900px;
+    font-size: calc(0.5vw + 0.65625rem);
+    font-weight: 400;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Navigation Bar Styling */
+/* ===== Navigation ===== */
 nav {
-    background-color: #fff; /* Or a subtle grey like #f8f8f8 */
-    padding: 10px 0;
-    border-bottom: 1px solid #eee;
-    margin-bottom: 15px; /* Reduced space between nav and main content */
-    transition: background-color 0.3s ease, border-bottom-color 0.3s ease;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background-color: var(--nav-bg);
+    /* Smaller blur radius: backdrop-filter is re-evaluated every scroll frame, so a
+       large kernel is a major fast-scroll cost. The nav bg is ~0.94 opaque, so a
+       light blur reads almost the same. */
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 24px;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 nav ul {
     list-style-type: none;
-    margin: 0;
-    padding: 0;
-    text-align: right; /* Align links to the right */
-    max-width: 900px; /* Align with main content width */
-    margin-left: auto; /* These two center the ul */
-    margin-right: auto;
-    padding-right: 20px; /* Align with container padding */
+    margin: 0 auto;
+    padding: 8px 20px;
+    max-width: 900px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 4px;
+    box-sizing: border-box;
 }
 
 nav ul li {
-    display: inline-block;
-    margin-left: 20px;
+    display: inline-flex;
+    align-items: center;
 }
 
 nav ul li a {
     text-decoration: none;
-    color: #007bff; /* Blue links, or #555 for more subtle */
-    font-size: 1em; /* Relative to body font size */
-    font-weight: 400; /* Slightly less than medium for nav links, not too thin */
+    color: var(--text-secondary);
+    font-family: 'Schibsted Grotesk', sans-serif;
+    font-size: 0.86em;
+    font-weight: 500;
+    padding: 6px 14px;
+    border-radius: 999px;
+    letter-spacing: 0.015em;
+    transition: color 0.2s ease, background-color 0.2s ease;
 }
 
 nav ul li a:hover {
-    text-decoration: underline;
+    color: var(--accent);
+    background-color: var(--accent-light);
+    text-decoration: none;
 }
 
-.container {
-    width: 100%; /* Container takes full width of body's max-width */
-    padding: 0 20px; /* Padding on sides */
-    box-sizing: border-box;
+/* Nav name: appears on the left once the hero "Ryan Diaz" heading scrolls away.
+   Matches the header h1 style. .is-visible is toggled by JS. */
+.nav-name-item {
+    margin-right: auto; /* push the rest of the links to the right */
+}
+
+.nav-name.nav-name {
+    font-family: 'Schibsted Grotesk', sans-serif;
+    font-size: 1.4em;
+    font-weight: 700;
+    /* line-height:1 + tuned padding keeps the box the same height as before,
+       so the larger font doesn't grow the nav bar */
+    line-height: 1;
+    letter-spacing: -0.03em;
+    color: var(--text-primary);
+    padding: 7px 6px;
+    border-radius: 8px;
+    opacity: 0;
+    transform: translateY(-4px);
+    pointer-events: none;
+    transition: opacity 0.25s ease, transform 0.25s ease, color 0.2s ease, background-color 0.2s ease;
+}
+
+.nav-name.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.nav-name.nav-name:hover {
+    color: var(--accent);
     background-color: transparent;
-    box-shadow: none;
 }
 
-header {
-    padding-bottom: 20px;
-    border-bottom: 1px solid #ddd;
-    margin-bottom: 20px;
+/* ===== Container ===== */
+.container {
+    width: 100%;
+    padding: 0 20px;
+    box-sizing: border-box;
 }
 
+/* ===== Profile Header ===== */
 .profile-header {
-    padding-bottom: 15px; /* Reduced padding */
-    border-bottom: 1px solid #eee;
-    margin-bottom: 15px; /* Reduced space after the header block/line */
+    padding: 32px 0 28px;
+    margin-bottom: 0;
 }
 
 .profile-section {
     display: flex;
-    align-items: center; /* Vertically center items in profile section */
-    margin-bottom: 25px;
-    padding-bottom: 25px;
-    border-bottom: none; /* Remove duplicate border if any was here */
+    align-items: stretch;
+    gap: 40px;
 }
 
 .profile-pic-container {
-    margin-right: 30px;
     flex-shrink: 0;
+    display: flex;
+    width: 240px;
 }
 
 .profile-pic {
-    width: 100%; /* Make profile picture responsive */
-    max-width: 220px; /* Maintain a max size */
-    height: auto;
-    border-radius: 20px;
+    width: 100%;
+    height: 100%;
+    border-radius: 16px;
     object-fit: cover;
-    border: 1px solid #ddd;
-    /* display: block; and margin-bottom: 15px; are less relevant now with flex centering */
+    border: 1px solid var(--profile-border);
+    display: block;
+    box-shadow: var(--card-shadow);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .bio {
     flex-grow: 1;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Center children (h1, p, email, links) */
-    margin-left: 30px; /* Add some space between pic and bio text */
+    align-items: center;
 }
 
 .bio h1 {
-    font-size: calc(1.5vw + 1.9em); /* Responsive H1 for < 900px */
-    margin-top: 0;
-    margin-bottom: 10px;
-    color: #000;
-    font-weight: 400; /* Adjusted H1 weight, as 300 might be too thin for a large title */
-    text-align: center; /* Ensure centering */
+    font-family: 'Schibsted Grotesk', sans-serif;
+    font-size: calc(1.5vw + 1.9em);
+    font-weight: 700;
+    letter-spacing: -0.035em;
+    margin: 0 0 14px;
+    color: var(--text-primary);
+    text-align: center;
+    line-height: 1.1;
 }
 
 .bio > p {
     text-align: left;
-    font-size: 1em; /* Relative to body font size (15px) */
-    line-height: 1.6;
-    margin-bottom: 15px;
-    max-width: 600px; /* Constrain bio paragraph width */
+    font-size: 0.95em;
+    line-height: 1.65;
+    margin-bottom: 12px;
+    max-width: 580px;
+    color: var(--text-primary);
 }
 
-.bio p.email-link-bio {
-    text-align: center;
-    font-size: 1em; /* Relative to body font size */
-    margin-top: 10px;
-    margin-bottom: 10px;
-    max-width: none;
-}
-
-.bio p.email-link-bio a {
-    color: #007bff;
+.bio > p a {
+    color: var(--accent);
     text-decoration: none;
 }
 
-.bio p.email-link-bio a:hover {
+.bio > p a:hover {
+    text-decoration: underline;
+}
+
+.bio-footer {
+    /* Offset past the photo (240px) + gap (40px) so it centers under the bio column, not the full page */
+    margin-top: 18px;
+    margin-left: calc(240px + 40px);
+    text-align: center;
+}
+
+.email-link-bio {
+    text-align: center;
+    font-size: 0.88em;
+    margin: 8px 0;
+    max-width: none;
+    color: var(--text-secondary);
+}
+
+.email-link-bio a {
+    color: var(--accent);
+    text-decoration: none;
+}
+
+.email-link-bio a:hover {
     text-decoration: underline;
 }
 
 .links-section {
+    margin-top: 14px;
     text-align: center;
-    margin-top: 15px; /* Increased space after email */
-    margin-bottom: 0;
-    font-size: 0.93em; /* Approx 14px if base is 15px */
-    padding-left: 0;
 }
 
 .links-section p {
-    margin: 0; /* Remove default paragraph margin */
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
 }
 
 .links-section p a {
-    display: inline-block; /* Allow padding and proper spacing */
-    padding: 10px 18px;
-    margin: 5px 8px;
-    background-color: #e9e9e9; /* Lighter grey */
-    color: #333;
-    border-radius: 8px;
+    display: inline-block;
+    padding: 7px 20px;
+    background-color: var(--btn-bg);
+    color: var(--btn-color);
+    border-radius: 999px;
     text-decoration: none;
-    font-weight: 400; /* Buttons might look better not too thin */
-    transition: background-color 0.2s ease;
+    font-family: 'Schibsted Grotesk', sans-serif;
+    font-size: 0.84em;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    transition: background-color 0.2s ease, transform 0.15s ease, color 0.3s ease;
 }
 
 .links-section p a:hover {
-    background-color: #d0d0d0; /* Darker grey on hover */
+    background-color: var(--btn-hover);
     text-decoration: none;
+    transform: translateY(-1px);
 }
 
-.section-divider {
-    display: none !important; /* Ensure all hr.section-divider are hidden */
-}
-
-/* General Section Styling */
+/* ===== Sections ===== */
 section {
-    margin-bottom: 15px; /* Greatly reduced space between sections */
-    padding-top: 5px; /* Reduced space above section title */
-    padding-bottom: 15px; /* Reduced space for content and before border */
-    border-bottom: 1px solid #eee;
+    padding: 28px 0 24px;
+    margin-bottom: 0;
 }
 
 section:last-of-type {
-    border-bottom: none; /* No line after the last section */
+    padding-bottom: 56px;
 }
 
-section h2 {
-    font-size: calc(1vw + 1.27em); /* Responsive H2 for < 900px */
-    color: #333;
-    font-weight: 500; /* Section titles should still have some prominence */
-    /* text-transform: uppercase; */
-    letter-spacing: 0.5px;
-    margin-top: 0;
-    margin-bottom: 20px;
-    padding-bottom: 5px;
-    border-bottom: none; /* Removed border from under section titles */
+.section-header {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin-bottom: 22px;
+    flex-wrap: wrap;
 }
 
-/* News Section Styling (Previously Updates) */
-.news-section ul { /* Renamed from .updates-section */
+/* Note set to the right of a section heading (e.g. "*denotes equal contribution").
+   Paragraph-style text, a touch greyer than body copy but still on-theme. */
+.section-note {
+    margin-left: auto;
+    font-size: 0.95em;
+    line-height: 1.4;
+    color: var(--text-secondary);
+}
+
+section h1 {
+    font-family: 'Schibsted Grotesk', sans-serif;
+    /* Fixed px (not em) so the size stays constant across viewport widths */
+    font-size: 35px;
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: -0.035em;
+    line-height: 1.05;
+    margin: 0;
+    padding: 0;
+}
+
+/* ===== News Section ===== */
+.news-section ul {
     list-style-type: none;
-    padding-left: 0;
-    font-size: 0.93em;
-    max-height: 160px;
-    overflow-y: auto;
-    border: none;
-    padding: 0; /* Removed padding here, will add to li or spans if needed */
+    padding: 0;
+    margin: 0;
+    font-size: 0.9em;
 }
 
-.news-section li { /* Renamed from .updates-section */
-    display: flex; /* Use flexbox for two-column layout */
-    margin-bottom: 8px; /* Adjusted margin from your previous edit for li */
-    line-height: 1.5;
-    padding: 0px 0; /* Small padding for each item */
+.news-section li {
+    display: flex;
+    margin-bottom: 10px;
+    line-height: 1.55;
 }
 
 span.update-date {
-    flex-basis: 130px; /* Fixed width for the date column */
-    flex-shrink: 0; /* Prevent date column from shrinking */
-    margin-right: -20px; /* Space between date and description */
-    font-style: italic; /* Italicize the date part including em and strong */
+    flex-basis: 130px;
+    flex-shrink: 0;
+    margin-right: -20px;
 }
 
 span.update-date strong em {
-    font-weight: 300; /* Inherited from body is 300, but em might reset, ensure it's light */
-    color: #777;
-    font-style: normal; /* Counteract parent span.update-date italic if only em should be italic */
-    /* If the entire date span should be italic including strong, remove this line */
+    font-weight: 500;
+    font-size: 0.95em;
+    color: var(--text-muted);
+    font-style: normal;
 }
 
 span.update-description {
-    flex-grow: 1; /* Description takes remaining space */
-    text-align: justify;
+    flex-grow: 1;
 }
 
-/* Education Section Styling */
-.education-entry {
-    display: flex;
-    align-items: flex-start;
-    margin-bottom: 20px;
-}
-
-.education-logo-container {
-    margin-right: 15px;
-    flex-shrink: 0;
-}
-
-.uni-logo {
-    width: 50px; /* Adjust as needed */
-    height: 50px;
-    object-fit: contain;
-    border: 1px solid #eee;
-}
-
-.education-details h3 {
-    font-size: 1.07em; /* Approx 16px */
-    margin-top: 0;
-    margin-bottom: 5px;
-    font-weight: 500; /* Keep some weight for sub-headings */
-}
-
-.education-details p {
-    font-size: 0.93em; /* Approx 14px */
-    margin-top: 0;
-    margin-bottom: 5px;
-    line-height: 1.4;
-}
-
-/* Publications & Projects Section Styling (Shared) */
-.publication-entry, .project-entry {
-    display: flex;
-    margin-bottom: 10px;
-    padding-bottom: 10px;
-    border-bottom: none; /* Individual entries don't have bottom border, section does */
-    align-items: center;
-}
-
-.publication-entry strong, .project-entry strong {
-    font-weight: 600;
-}
-
-.publication-entry:last-child, .project-entry:last-child {
-    margin-bottom: 0;
-    padding-bottom: 0;
-    /* No border-bottom here if it's the true last inside a collapsible section */
-}
-
-.publication-image, .project-image {
-    margin-right: 20px;
-    flex-shrink: 0;
-}
-
-.publication-image img, .project-image img {
-    width: 100%; /* Make it responsive */
-    max-width: 220px; /* Keep original max size */
-    height: auto;
-    /* border: 1px solid #ddd; */
-    margin-bottom: 5px; /* Add a small margin if text wraps under */
-    border-radius: 15px;
-    border: 1px solid #ddd;
-}
-
-.publication-details, .project-details {
-    font-size: 0.93em;
-    /* line-height: 1.0; Parent line-height, will be overridden by p specific below */
-}
-
-.publication-details h3, .project-details h3 {
-    font-size: 1.15em; /* Approx 16px, relative to 14px */
-    font-weight: 500; /* Keep some weight for sub-headings */
-    margin-top: 0.2px;
-    margin-bottom: 0.2px;
-    color: #0056b3; /* Darker blue for titles */
-    line-height: 1.2;
-}
-
-.publication-details p, .project-details p {
-    margin-top: 13px;
-    margin-bottom: 13px; /* Keeps paragraphs close to each other */
-    line-height: 1.2; /* Slightly increased spacing for lines within this paragraph */
-}
-
-.publication-details em, .project-details em {
-    font-style: italic;
-    color: #555;
-}
-
-.publication-details a, .project-details a {
-    color: #007bff;
+.news-section a {
+    color: var(--accent);
     text-decoration: none;
-    margin-right: 5px;
 }
 
-.publication-details a:hover, .project-details a:hover {
+.news-section a:hover {
     text-decoration: underline;
 }
 
-footer {
+/* Hidden news wrapper */
+#hidden-news-wrapper {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease-out;
+}
+
+#hidden-news-wrapper.expanded {
+    max-height: 5000px;
+}
+
+#hidden-news-wrapper ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Match top margin of hidden news list to the gap between shown items */
+#hidden-news-wrapper {
+    margin-top: 10px;
+}
+
+#hidden-news-wrapper li {
+    opacity: 0;
+    transition: opacity 0.4s ease-out 0.1s;
+}
+
+#hidden-news-wrapper.expanded li {
+    opacity: 1;
+}
+
+/* ===== Toggle Buttons (More News / More Projects) ===== */
+.toggle-btn {
+    display: block;
+    width: fit-content;
+    padding: 8px 22px;
+    margin: 16px auto 0;
+    background-color: transparent;
+    color: var(--toggle-color);
+    border: 1.5px dashed var(--toggle-border);
+    border-radius: 999px;
     text-align: center;
-    padding: 20px 0;
-    margin-top: 30px;
-    border-top: 1px solid #eee;
-    font-size: 0.9em;
-    color: #777;
-}
-
-/* Styling for the collapsible project section */
-.toggle-projects-btn {
-    display: block; /* Make it a block to take full width */
-    width: 100%; /* Stretch across its container */
-    padding: 10px 15px;
-    margin-top: 20px; /* Space above the button */
-    margin-bottom: 10px; /* Space below before hidden content */
-    background-color: #f0f0f0; /* Light grey background */
-    color: #333;
-    border: none; /* Remove default border */
-    border-radius: 5px; /* Slightly rounded corners */
-    text-align: left; /* Align text to the left like a header */
-    font-size: 1.1em; /* Slightly smaller than section headers, but larger than body */
-    font-weight: 500; /* Similar weight to section headers */
+    font-family: 'Schibsted Grotesk', sans-serif;
+    font-size: 0.8em;
+    font-weight: 500;
+    letter-spacing: 0.025em;
     cursor: pointer;
-    transition: background-color 0.2s ease;
-    box-sizing: border-box; /* Ensure padding doesn't add to width */
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+    box-sizing: border-box;
 }
 
-.toggle-projects-btn:hover {
-    background-color: #e0e0e0; /* Darker grey on hover */
+.toggle-btn:hover {
+    background-color: var(--accent-light);
+    border-color: var(--accent);
+    border-style: solid;
+    color: var(--accent);
 }
 
-/* Wrapper for hidden projects - controls expand/collapse animation */
+/* ===== Publication & Project Cards ===== */
+.publication-entry,
+.project-entry {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 18px;
+    margin-bottom: 12px;
+    border: 1px solid var(--border-card);
+    border-radius: 14px;
+    background-color: var(--card-bg);
+    box-shadow: var(--card-shadow);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.publication-entry:hover,
+.project-entry:hover {
+    transform: scale(1.015);
+    box-shadow: var(--card-shadow-hover);
+    border-color: rgba(30, 64, 175, 0.28);
+}
+
+html.dark-mode .publication-entry:hover,
+html.dark-mode .project-entry:hover {
+    border-color: rgba(96, 165, 250, 0.28);
+}
+
+.publication-entry:last-child,
+.project-entry:last-child {
+    margin-bottom: 0;
+}
+
+.publication-entry strong,
+.project-entry strong {
+    font-weight: 600;
+}
+
+/* Card image containers — position:relative required for canvas overlay */
+.publication-image,
+.project-image {
+    flex-shrink: 0;
+    position: relative;
+}
+
+.publication-image img,
+.project-image img {
+    display: block;
+    width: 240px;
+    height: auto;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    transition: border-color 0.3s ease;
+}
+
+/* Card text content */
+.publication-details,
+.project-details {
+    flex: 1;
+    font-size: 0.9em;
+    min-width: 0;
+}
+
+.publication-details h3,
+.project-details h3 {
+    font-family: 'Schibsted Grotesk', sans-serif;
+    font-size: 1.24em;
+    font-weight: 600;
+    margin: 0 0 7px;
+    color: var(--accent);
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+}
+
+.publication-details p,
+.project-details p {
+    margin: 7px 0;
+    line-height: 1.45;
+    color: var(--text-primary);
+}
+
+.publication-details em,
+.project-details em {
+    font-style: italic;
+    color: var(--text-secondary);
+}
+
+.publication-details a,
+.project-details a {
+    color: var(--accent);
+    text-decoration: none;
+    margin-right: 4px;
+    font-weight: 500;
+}
+
+.publication-details a:hover,
+.project-details a:hover {
+    text-decoration: underline;
+}
+
+/* ===== Hidden Projects Wrapper ===== */
 #hidden-projects-wrapper {
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.5s ease-out;
-    /* Ensure children project entries don't have unusual top margins initially */
 }
 
 #hidden-projects-wrapper.expanded {
-    max-height: 10000px; /* Increased to accommodate all hidden projects, especially on mobile */
-    /* Add a little space above the first hidden item when expanded */
-    /* padding-top: 15px; */ /* Optional: if you want space inside the wrapper */
+    max-height: 10000px;
 }
 
-/* Styling for individual project entries within the now visible wrapper */
 #hidden-projects-wrapper .project-entry {
     opacity: 0;
-    transition: opacity 0.4s ease-out 0.1s; /* Delay opacity for smoother feel after expand */
-    /* Ensure normal display and margins are applied when they become part of the flow */
-    display: flex; /* Assuming .project-entry uses flex */
-    margin-bottom: 15px !important; /* Restore original margin */
-    padding-bottom: 15px !important; /* Restore original padding */
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.3s ease, background-color 0.3s ease, opacity 0.4s ease-out 0.1s;
 }
 
 #hidden-projects-wrapper.expanded .project-entry {
     opacity: 1;
 }
 
-/* Remove bottom margin/padding from the very last project entry inside the expanded wrapper */
-#hidden-projects-wrapper.expanded .project-entry:last-child {
-    margin-bottom: 0 !important;
-    padding-bottom: 0 !important;
-}
-
-/* Theme Toggle Button Styling */
+/* ===== Theme Toggle Button ===== */
 #theme-toggle {
-    background-color: transparent; /* Make background transparent for icon look */
-    color: #007bff; /* Default light mode icon color (sun) */
+    background-color: transparent;
     border: none;
-    padding: 5px 10px; /* Adjust padding */
-    font-size: 20px; /* Larger font size for icon */
-    font-weight: 400;
-    border-radius: 5px;
+    padding: 6px 10px;
+    font-size: 18px;
+    border-radius: 8px;
     cursor: pointer;
-    transition: color 0.3s ease;
-    line-height: 1; /* Ensure icon is vertically centered if text is removed */
+    transition: background-color 0.2s ease;
+    line-height: 1;
 }
 
 #theme-toggle:hover {
-    color: #0056b3; /* Darker on hover */
-    background-color: #f0f0f0; /* Slight background on hover */
+    background-color: var(--accent-light);
 }
 
-/* Dark Mode Styles */
-body.dark-mode {
-    background-color: #1a1a1a;
-    color: #ccc;
+/* ===== Footer ===== */
+footer {
+    text-align: center;
+    padding: 20px 0;
+    margin-top: 30px;
+    border-top: 1px solid var(--border);
+    font-size: 0.85em;
+    color: var(--text-secondary);
 }
 
-body.dark-mode nav {
-    background-color: #1a1a1a; /* Match body background */
-    border-bottom: 1px solid #444;
-}
-
-body.dark-mode nav ul li a {
-    color: #f076b9; /* Lighter magenta for links in dark mode */
-    transition: color 0.3s ease;
-}
-
-body.dark-mode .profile-header {
-    border-bottom-color: #444;
-    transition: border-bottom-color 0.3s ease;
-}
-
-body.dark-mode .profile-pic {
-    border-color: #555;
-    transition: border-color 0.3s ease;
-}
-
-body.dark-mode .bio h1 {
-    color: #e0e0e0;
-    transition: color 0.3s ease;
-}
-
-body.dark-mode .bio > p {
-    color: #bbb;
-    transition: color 0.3s ease;
-}
-
-body.dark-mode .bio p a, /* Specific rule for links within bio paragraphs */
-body.dark-mode .bio a, /* General rule for any other links directly in .bio if any */
-body.dark-mode .news-section a, /* Links in news section - Renamed */
-body.dark-mode .bio p.email-link-bio a {
-    color: #f076b9; /* Lighter magenta */
-    transition: color 0.3s ease;
-}
-
-body.dark-mode .links-section p a {
-    background-color: #3a3a3a;
-    color: #ccc;
-    border: 1px solid #555;
-    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-}
-
-body.dark-mode .links-section p a:hover {
-    background-color: #4f4f4f;
-}
-
-body.dark-mode section {
-    border-bottom-color: #444;
-    transition: border-bottom-color 0.3s ease;
-}
-
-body.dark-mode section:last-of-type {
-    border-bottom: none;
-}
-
-body.dark-mode section h2 {
-    color: #d0d0d0;
-    transition: color 0.3s ease;
-}
-
-body.dark-mode .news-section ul { /* Renamed from .updates-section */
-    /* No specific background needed, inherits from body */
-}
-
-body.dark-mode span.update-date strong em {
-    color: #999;
-    transition: color 0.3s ease;
-}
-
-body.dark-mode .uni-logo {
-    border-color: #444;
-    background-color: #eee; 
-    transition: border-color 0.3s ease, background-color 0.3s ease; /* Added background transition in case it changes */
-}
-
-body.dark-mode .publication-details h3,
-body.dark-mode .project-details h3 {
-    color: #82c0ff; /* Adjusted from #66b0ff for better magenta harmony, still light blue */
-    transition: color 0.3s ease;
-}
-
-body.dark-mode .publication-details em,
-body.dark-mode .publication-details strong,
-body.dark-mode .project-details em,
-body.dark-mode .project-details strong {
-    color: inherit; /* Inherit from parent <p> or details section */
-}
-
-body.dark-mode .publication-details a,
-body.dark-mode .project-details a {
-    color: #f076b9; /* Lighter magenta */
-    transition: color 0.3s ease;
-}
-
-body.dark-mode .toggle-projects-btn {
-    background-color: #2c2c2c;
-    color: #ccc;
-    border-color: #444;
-    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-}
-
-body.dark-mode .toggle-projects-btn:hover {
-    background-color: #3a3a3a;
-}
-
-body.dark-mode footer {
-    border-top-color: #444;
-    color: #888;
-    transition: border-top-color 0.3s ease, color 0.3s ease;
-}
-
-body.dark-mode #theme-toggle {
-    color: #ffd700; /* Sun color for dark mode (moon icon will be shown) */
-    background-color: transparent;
-}
-
-body.dark-mode #theme-toggle:hover {
-    color: #ffec80; /* Lighter sun/moon on hover */
-    background-color: #444; /* Darker background on hover in dark mode */
-}
-
-/* Media Queries for Responsive Design */
+/* ===== Responsive ===== */
 @media (max-width: 768px) {
+    nav ul {
+        justify-content: center;
+        padding: 6px 10px;
+        flex-wrap: wrap;
+        gap: 0;
+    }
+
+    /* Two-column layout: photo left, name + bio to the right (no wrapping under the photo) */
     .profile-section {
-        flex-direction: column; /* Stack profile pic and bio on smaller screens */
-        align-items: center;
+        gap: 20px;
+        align-items: flex-start;
     }
 
     .profile-pic-container {
-        margin-right: 0;
-        margin-bottom: 20px;
+        width: 40%;
     }
 
-    .bio {
-        margin-left: 0; /* Remove left margin when stacked */
-        align-items: center; /* Center bio content */
+    .profile-pic {
+        height: auto;
     }
 
     .bio > p {
-        text-align: left;   /* Left-align bio text on smaller screens */
-        align-self: center; /* Ensure the paragraph block itself is centered */
+        max-width: none;
     }
 
-    nav ul {
-        text-align: center; /* Center nav links */
-        padding-right: 0;
-    }
-
-    nav ul li {
-        margin-left: 10px;
-        margin-right: 10px; /* Add some right margin for spacing */
+    .bio-footer {
+        margin-left: calc(40% + 20px);
     }
 
     .news-section li {
-        flex-direction: column; /* Stack date and description */
-        align-items: flex-start; /* Align items to the start */
+        flex-direction: column;
+        align-items: flex-start;
     }
 
     span.update-date {
         margin-right: 0;
-        margin-bottom: 5px; /* Add space between date and description */
-        flex-basis: auto; /* Allow date to take natural width */
+        margin-bottom: 3px;
+        flex-basis: auto;
     }
 }
 
 @media (max-width: 480px) {
-    /* body font-size rule removed from here, global rule will apply and scale down */
-
     .bio h1 {
-        font-size: calc(2.5vw + 1em); /* Adjust H1 for very small screens */
-    }
-
-    section h2 {
-        font-size: calc(1vw + 1.27em); /* Adjust H2 for very small screens */
+        font-size: calc(2.5vw + 1em);
     }
 
     .links-section p a {
-        padding: 8px 12px; /* Smaller buttons */
-        margin: 3px 5px;
+        padding: 6px 14px;
+        font-size: 0.82em;
     }
 
-    .publication-entry, .project-entry {
+    .publication-entry,
+    .project-entry {
         flex-direction: column;
-        align-items: center;
+        align-items: flex-start;
     }
 
-    .publication-image, .project-image {
-        margin-right: 0;
-        margin-bottom: 15px;
-        width: 100%; /* Make the image container full-width */
+    .publication-image,
+    .project-image {
+        width: 100%;
     }
 
-    /* Add new rule for images specifically on mobile */
-    .publication-image img, .project-image img {
-        max-width: 100%; /* Allow image to fill its container, overriding desktop max-width */
+    .publication-image img,
+    .project-image img {
+        width: 100%;
+        max-width: 100%;
     }
 
-    .publication-details, .project-details {
-        /* align-items: center; Removed, as parent handles centering and this is for flex children */
-        text-align: left; 
-        width: 100%; /* Make the details block full-width */
-    }
-    .publication-details p, .project-details p {
-        text-align: left; 
+    .publication-details,
+    .project-details {
+        width: 100%;
     }
 }
 
-/* Media Query for Desktop fixed sizes */
-@media (min-width: 900px) {
-    body {
-        font-size: 15px;
+/* Phones: float the photo so the biography text wraps around it */
+@media (max-width: 440px) {
+    .profile-section {
+        display: block;
     }
+
+    .profile-pic-container {
+        float: left;
+        width: 42%;
+        margin: 4px 18px 8px 0;
+    }
+
+    .profile-pic {
+        height: auto;
+    }
+
+    .bio {
+        display: block;
+    }
+
     .bio h1 {
-        font-size: 42px;
+        text-align: left;
     }
-    section h2 {
-        font-size: 28px;
+
+    .bio > p {
+        text-align: left;
     }
-    /* nav ul li a will be 1em of 15px = 15px, which is correct. */
-    /* Other em based sizes will correctly use 15px as their base. */
-} 
+
+    /* Bio now spans the full width (text wraps around the photo), so center the footer with it */
+    .bio-footer {
+        margin-left: 0;
+        clear: both;
+        text-align: center;
+    }
+}
+
+@media (min-width: 900px) {
+    body { font-size: 15px; }
+    .bio h1 { font-size: 44px; }
+}
