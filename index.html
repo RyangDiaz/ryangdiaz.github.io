@@ -526,7 +526,18 @@
                 canvas.style.cssText = 'position:absolute;top:0;left:0;border-radius:10px;pointer-events:none;display:none';
                 container.appendChild(canvas);
                 var hovering = false;
-                var bust = false;
+                var which = 0;
+
+                // Hover restarts the GIF from frame 0 by swapping to a URL that differs from the
+                // current one. We alternate between the already-loaded original and ONE extra
+                // "?replay" variant (so just one additional download). That variant is preloaded
+                // and decoded up front, kept referenced so it isn't GC'd, so the hover swap comes
+                // from cache and starts instantly instead of waiting on a fetch.
+                var sep = baseSrc.indexOf('?') >= 0 ? '&' : '?';
+                var srcs = [baseSrc, baseSrc + sep + 'replay'];
+                var preload = new Image();
+                preload.src = srcs[1];
+                if (preload.decode) { preload.decode().catch(function () {}); }
 
                 function captureFrame() {
                     var w = img.offsetWidth;
@@ -557,12 +568,11 @@
 
                 entry.addEventListener('mouseenter', function () {
                     hovering = true;
-                    // Reload the GIF so it animates from the start. Alternating the query each
-                    // time guarantees the URL differs from the current one (forcing a restart)
-                    // while only ever using two cache entries. The frozen overlay stays up until
-                    // the 'load' above hides it.
-                    bust = !bust;
-                    img.src = baseSrc + (baseSrc.indexOf('?') >= 0 ? '&' : '?') + 'replay=' + (bust ? 1 : 0);
+                    // Swap to the alternate (cached, decoded) src so it restarts from frame 0
+                    // immediately. The frozen overlay stays up until the 'load' above hides it,
+                    // which is near-instant since both srcs are already cached.
+                    which ^= 1;
+                    img.src = srcs[which];
                 });
                 entry.addEventListener('mouseleave', function () {
                     hovering = false;
