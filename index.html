@@ -512,17 +512,21 @@
             })();
 
             // ===== GIF freeze/play =====
-            // On page load: capture first frame of each GIF to a canvas overlay (frozen).
-            // On mouseenter: hide canvas so the live GIF plays.
-            // On mouseleave: re-capture current frame to canvas (re-freezes).
+            // The GIF <img> loops continuously, so a frozen-frame canvas overlay covers it
+            // when not hovered. On hover we restart the GIF from frame 0 (by reloading its
+            // src) and reveal it once the first frame is ready; the overlay masks the reload.
+            // On mouseleave we re-capture the current frame to the canvas (re-freezes).
             document.querySelectorAll('.publication-entry, .project-entry').forEach(function (entry) {
                 var img = entry.querySelector('img');
                 if (!img || img.src.toLowerCase().indexOf('.gif') === -1) return;
 
+                var baseSrc = img.src;
                 var container = img.parentElement;
                 var canvas = document.createElement('canvas');
                 canvas.style.cssText = 'position:absolute;top:0;left:0;border-radius:10px;pointer-events:none;display:none';
                 container.appendChild(canvas);
+                var hovering = false;
+                var bust = false;
 
                 function captureFrame() {
                     var w = img.offsetWidth;
@@ -541,14 +545,29 @@
                     canvas.style.display = 'block';
                 }
 
-                if (img.complete && img.naturalWidth > 0) {
-                    captureFrame();
-                } else {
-                    img.addEventListener('load', captureFrame, { once: true });
-                }
+                // Fires for the initial load and each hover-triggered restart.
+                img.addEventListener('load', function () {
+                    if (hovering) {
+                        canvas.style.display = 'none'; // reveal the GIF, now playing from frame 0
+                    } else {
+                        captureFrame();
+                    }
+                });
+                if (img.complete && img.naturalWidth > 0) captureFrame();
 
-                entry.addEventListener('mouseenter', function () { canvas.style.display = 'none'; });
-                entry.addEventListener('mouseleave', function () { captureFrame(); });
+                entry.addEventListener('mouseenter', function () {
+                    hovering = true;
+                    // Reload the GIF so it animates from the start. Alternating the query each
+                    // time guarantees the URL differs from the current one (forcing a restart)
+                    // while only ever using two cache entries. The frozen overlay stays up until
+                    // the 'load' above hides it.
+                    bust = !bust;
+                    img.src = baseSrc + (baseSrc.indexOf('?') >= 0 ? '&' : '?') + 'replay=' + (bust ? 1 : 0);
+                });
+                entry.addEventListener('mouseleave', function () {
+                    hovering = false;
+                    captureFrame();
+                });
             });
 
             // ===== News section: More News button =====
