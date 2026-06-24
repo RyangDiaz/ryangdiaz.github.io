@@ -522,11 +522,9 @@ html.dark-mode .project-entry:hover {
     font-weight: 600;
 }
 
-/* Card image containers — position:relative required for canvas overlay */
 .publication-image,
 .project-image {
     flex-shrink: 0;
-    position: relative;
 }
 
 .publication-image img,
