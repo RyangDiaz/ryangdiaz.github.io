@@ -21,6 +21,19 @@
     --nav-bg: rgba(244, 247, 252, 0.94);
     --dot-color: rgba(99, 120, 160, 0.22);
     --profile-border: #E2E8F0;
+
+    /* Venue badge palette: 10 slots (fg = text/border, bg = fill), assigned to
+       venues in the "Venue color registry" below. */
+    --venue-1: #1E40AF;  --venue-1-bg: #DBEAFE;   /* blue */
+    --venue-2: #115E59;  --venue-2-bg: #CCFBF1;   /* teal */
+    --venue-3: #5B21B6;  --venue-3-bg: #EDE9FE;   /* violet */
+    --venue-4: #92400E;  --venue-4-bg: #FEF3C7;   /* amber */
+    --venue-5: #9F1239;  --venue-5-bg: #FFE4E6;   /* rose */
+    --venue-6: #065F46;  --venue-6-bg: #D1FAE5;   /* emerald */
+    --venue-7: #3730A3;  --venue-7-bg: #E0E7FF;   /* indigo */
+    --venue-8: #86198F;  --venue-8-bg: #FAE8FF;   /* fuchsia */
+    --venue-9: #155E75;  --venue-9-bg: #CFFAFE;   /* cyan */
+    --venue-10: #334155; --venue-10-bg: #F1F5F9;  /* slate */
 }
 
 html.dark-mode {
@@ -45,6 +58,17 @@ html.dark-mode {
     --nav-bg: rgba(11, 14, 26, 0.95);
     --dot-color: rgba(30, 80, 200, 0.16);
     --profile-border: #1E2844;
+
+    --venue-1: #60A5FA;  --venue-1-bg: #172554;   /* blue */
+    --venue-2: #2DD4BF;  --venue-2-bg: #042F2E;   /* teal */
+    --venue-3: #A78BFA;  --venue-3-bg: #2E1065;   /* violet */
+    --venue-4: #FBBF24;  --venue-4-bg: #451A03;   /* amber */
+    --venue-5: #FB7185;  --venue-5-bg: #4C0519;   /* rose */
+    --venue-6: #34D399;  --venue-6-bg: #022C22;   /* emerald */
+    --venue-7: #818CF8;  --venue-7-bg: #1E1B4B;   /* indigo */
+    --venue-8: #E879F9;  --venue-8-bg: #4A044E;   /* fuchsia */
+    --venue-9: #22D3EE;  --venue-9-bg: #083344;   /* cyan */
+    --venue-10: #94A3B8; --venue-10-bg: #1E293B;  /* slate */
 }
 
 /* Unified theme fade: every element transitions its theme-dependent surfaces over
@@ -580,6 +604,40 @@ html.dark-mode .project-entry:hover {
 .publication-details a:hover,
 .project-details a:hover {
     text-decoration: underline;
+}
+
+/* ===== Venue Badge ===== */
+/* Conference acronym pill on publication entries. Sits inside the italic venue
+   line, so font-style is reset to keep the acronym upright. */
+.venue-badge {
+    display: inline-block;
+    padding: 2px 9px;
+    border: 1px solid var(--badge-fg, var(--accent));
+    border-radius: 999px;
+    background-color: var(--badge-bg, var(--accent-light));
+    color: var(--badge-fg, var(--accent));
+    font-family: 'Schibsted Grotesk', sans-serif;
+    font-size: 0.98em;
+    font-style: normal;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    line-height: 1.5;
+    white-space: nowrap;
+    vertical-align: baseline;
+    transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* ----- Venue color registry -----
+   To add a venue: (1) give its badge in index.html a data-venue="XYZ" attribute,
+   (2) add one line below pointing XYZ at an unused palette slot (1-10).
+   Unmapped venues fall back to the site accent. */
+.venue-badge[data-venue="ICRA"]  { --badge-fg: var(--venue-1); --badge-bg: var(--venue-1-bg); }
+.venue-badge[data-venue="AAMAS"] { --badge-fg: var(--venue-2); --badge-bg: var(--venue-2-bg); }
+.venue-badge[data-venue="IROS"]  { --badge-fg: var(--venue-3); --badge-bg: var(--venue-3-bg); }
+
+/* Match the year that follows a badge to the badge size. */
+.venue-badge + strong {
+    font-size: 0.98em;
 }
 
 /* ===== Hidden Projects Wrapper ===== */
